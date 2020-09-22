@@ -83,7 +83,9 @@ This is great.  We don't have to remember which file they are located in!
 
 ### Some Common Configuration Changes
 `STOP_N`: Run length time interval
-`STOP_OPTION': number of intervals to run during the specified wall clock time
+
+`STOP_OPTION`: number of intervals to run during the specified wall clock time
+
 `RESUBMIT`: number of times to resubmit a run
 
 > ## Configure your New Case
