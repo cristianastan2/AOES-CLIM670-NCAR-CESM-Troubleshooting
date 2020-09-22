@@ -11,7 +11,7 @@ keypoints:
 
 The `CASEROOT/env_*.xml files control how we compile and run the model. They were creatd with the `create_newcase` script.
 
-Add figure describing xml files
+![XMLFILES](../fig/envxmlfiles.png)
 
 These files are changed using the `xmlchange` command, but you can look at them to see what types of change you can make. 
 Let's look at `env_run.xml` in the `CASEROOT` directory for our new run. 
