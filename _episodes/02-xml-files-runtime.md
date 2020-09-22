@@ -110,6 +110,6 @@ This is great.  We don't have to remember which file they are located in!
 > > `RESUBMIT`=19
 > > 
 > {: .solution}
-
+>
 {: .challenge}
 
