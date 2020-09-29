@@ -19,7 +19,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="last-modified" content="2020-09-15 16:03:29 -0600">
+    <meta http-equiv="last-modified" content="2020-09-29 07:02:11 -0600">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- meta "search-domain" used for google site search function google_search() -->
     <meta name="search-domain" value="">
@@ -47,7 +47,7 @@
     <link rel="icon" type="image/png" href="./assets/favicons/swc/favicon-32x32.png" sizes="32x32" />
     <link rel="icon" type="image/png" href="./assets/favicons/swc/favicon-16x16.png" sizes="16x16" />
     <link rel="icon" type="image/png" href="./assets/favicons/swc/favicon-128.png" sizes="128x128" />
-    <meta name="application-name" content="Software Carpentry - NCAR and CESM Introduction"/>
+    <meta name="application-name" content="Software Carpentry - CESM Troubleshooting"/>
     <meta name="msapplication-TileColor" content="#FFFFFF" />
     <meta name="msapplication-TileImage" content="./assets/favicons/swc/mstile-144x144.png" />
     <meta name="msapplication-square70x70logo" content="./assets/favicons/swc/mstile-70x70.png" />
@@ -64,7 +64,7 @@
 	<![endif]-->
 
   <title>
-  NCAR and CESM Introduction
+  CESM Troubleshooting
   </title>  
 
   </head>
@@ -131,19 +131,16 @@
           <ul class="dropdown-menu">
             
             
-            <li><a href="./01-Two-Models/index.html">CESM and UFS</a></li>
+            <li><a href="./01-Our-Experiments-Troubleshooting/index.html">Our Experiments</a></li>
             
             
-            <li><a href="./02-CESM-Configuration/index.html">CESM Workflow</a></li>
+            <li><a href="./02-history-setup/index.html">History and Setup for Diagnostics</a></li>
             
             
-            <li><a href="./03-NCAR-Computing-Environment/index.html">The NCAR Computing Environment</a></li>
+            <li><a href="./03-diagnostics/index.html">Model Diagnostics Packages</a></li>
             
             
-            <li><a href="./04-Downloading-CESM/index.html">Downloading CESM</a></li>
-            
-            
-            <li><a href="./05-CESM-Quickstart/index.html">CESM Quickstart</a></li>
+            <li><a href="./04-postprocessing/index.html">Postprocessing</a></li>
             
 	    <li role="separator" class="divider"></li>
             <li><a href="./aio/index.html">All in one page (Beta)</a></li>
@@ -198,7 +195,7 @@
 
 
 
-<h1 class="maintitle"><a href="./index.html">NCAR and CESM Introduction</a></h1>
+<h1 class="maintitle"><a href="./index.html">CESM Troubleshooting</a></h1>
 
 
 
@@ -263,9 +260,6 @@
     
     
   
-    
-    
-  
   
 
   <table class="table table-striped">
@@ -279,25 +273,50 @@
       <td class="col-md-2">00:00</td>
       <td class="col-md-3">
         
-	1. <a href="./01-Two-Models/index.html">CESM and UFS</a>
+	1. <a href="./01-Our-Experiments-Troubleshooting/index.html">Our Experiments</a>
       </td>
       <td class="col-md-7">
         
           
             
-              What is CESM?
+              How can I confirm if everything ran correctly?
 
               
               <br/>
               
             
-              How does it differ from UFS?
+              How can I troubleshoot errors?
+
+              
+            
+          
+        
+      </td>
+    </tr>
+    
+  
+    
+    
+    
+    
+    <tr>
+      
+      <td class="col-md-2">00:00</td>
+      <td class="col-md-3">
+        
+	2. <a href="./02-history-setup/index.html">History and Setup for Diagnostics</a>
+      </td>
+      <td class="col-md-7">
+        
+          
+            
+              What is in our history files?
 
               
               <br/>
               
             
-              Why do we use CESM in this class?
+              How do I setup to run the postprocessing and diagnostics packages
 
               
             
@@ -316,13 +335,13 @@
       <td class="col-md-2">00:00</td>
       <td class="col-md-3">
         
-	2. <a href="./02-CESM-Configuration/index.html">CESM Workflow</a>
+	3. <a href="./03-diagnostics/index.html">Model Diagnostics Packages</a>
       </td>
       <td class="col-md-7">
         
           
             
-              What is the CESM Workflow?
+              How do I run the model diagnostics packages?
 
               
             
@@ -341,63 +360,19 @@
       <td class="col-md-2">00:00</td>
       <td class="col-md-3">
         
-	3. <a href="./03-NCAR-Computing-Environment/index.html">The NCAR Computing Environment</a>
+	4. <a href="./04-postprocessing/index.html">Postprocessing</a>
       </td>
       <td class="col-md-7">
         
           
             
-              How do I use the NCAR Computers?
+              What are some common run time configuration changes?
 
               
-            
-          
-        
-      </td>
-    </tr>
-    
-  
-    
-    
-    
-    
-    <tr>
-      
-      <td class="col-md-2">00:00</td>
-      <td class="col-md-3">
-        
-	4. <a href="./04-Downloading-CESM/index.html">Downloading CESM</a>
-      </td>
-      <td class="col-md-7">
-        
-          
-            
-              How do I download CESM?
-
+              <br/>
               
             
-          
-        
-      </td>
-    </tr>
-    
-  
-    
-    
-    
-    
-    <tr>
-      
-      <td class="col-md-2">00:00</td>
-      <td class="col-md-3">
-        
-	5. <a href="./05-CESM-Quickstart/index.html">CESM Quickstart</a>
-      </td>
-      <td class="col-md-7">
-        
-          
-            
-              How do I setup and run the CESM?
+              How do I make these changess?
 
               
             

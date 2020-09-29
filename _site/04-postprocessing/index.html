@@ -19,7 +19,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="last-modified" content="2020-09-15 16:03:29 -0600">
+    <meta http-equiv="last-modified" content="2020-09-29 07:02:11 -0600">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- meta "search-domain" used for google site search function google_search() -->
     <meta name="search-domain" value="">
@@ -47,7 +47,7 @@
     <link rel="icon" type="image/png" href="../assets/favicons/swc/favicon-32x32.png" sizes="32x32" />
     <link rel="icon" type="image/png" href="../assets/favicons/swc/favicon-16x16.png" sizes="16x16" />
     <link rel="icon" type="image/png" href="../assets/favicons/swc/favicon-128.png" sizes="128x128" />
-    <meta name="application-name" content="Software Carpentry - NCAR and CESM Introduction"/>
+    <meta name="application-name" content="Software Carpentry - CESM Troubleshooting"/>
     <meta name="msapplication-TileColor" content="#FFFFFF" />
     <meta name="msapplication-TileImage" content="../assets/favicons/swc/mstile-144x144.png" />
     <meta name="msapplication-square70x70logo" content="../assets/favicons/swc/mstile-70x70.png" />
@@ -64,7 +64,7 @@
 	<![endif]-->
 
   <title>
-  CESM Workflow &ndash; NCAR and CESM Introduction
+  Postprocessing &ndash; CESM Troubleshooting
   </title>  
 
   </head>
@@ -131,19 +131,16 @@
           <ul class="dropdown-menu">
             
             
-            <li><a href="../01-Two-Models/index.html">CESM and UFS</a></li>
+            <li><a href="../01-Our-Experiments-Troubleshooting/index.html">Our Experiments</a></li>
             
             
-            <li><a href="../02-CESM-Configuration/index.html">CESM Workflow</a></li>
+            <li><a href="../02-history-setup/index.html">History and Setup for Diagnostics</a></li>
             
             
-            <li><a href="../03-NCAR-Computing-Environment/index.html">The NCAR Computing Environment</a></li>
+            <li><a href="../03-diagnostics/index.html">Model Diagnostics Packages</a></li>
             
             
-            <li><a href="../04-Downloading-CESM/index.html">Downloading CESM</a></li>
-            
-            
-            <li><a href="../05-CESM-Quickstart/index.html">CESM Quickstart</a></li>
+            <li><a href="../04-postprocessing/index.html">Postprocessing</a></li>
             
 	    <li role="separator" class="divider"></li>
             <li><a href="../aio/index.html">All in one page (Beta)</a></li>
@@ -227,19 +224,19 @@
   <div class="col-xs-1">
     <h3 class="text-left">
       
-      <a href="../01-Two-Models/index.html"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">previous episode</span></a>
+      <a href="../03-diagnostics/index.html"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">previous episode</span></a>
       
     </h3>
   </div>
   <div class="col-xs-10">
     
-    <h3 class="maintitle"><a href="../">NCAR and CESM Introduction</a></h3>
+    <h3 class="maintitle"><a href="../">CESM Troubleshooting</a></h3>
     
   </div>
   <div class="col-xs-1">
     <h3 class="text-right">
       
-      <a href="../03-NCAR-Computing-Environment/index.html"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span class="sr-only">next episode</span></a>
+      <a href="../"><span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span><span class="sr-only">lesson home</span></a>
       
     </h3>
   </div>
@@ -250,7 +247,7 @@
   <div class="col-md-1">
   </div>
   <div class="col-md-10">
-    <h1 class="maintitle">CESM Workflow</h1>
+    <h1 class="maintitle">Postprocessing</h1>
   </div>
   <div class="col-md-1">
   </div>
@@ -280,7 +277,10 @@
       <strong>Questions</strong>
       <ul>
 	
-	<li><p>What is the CESM Workflow?</p>
+	<li><p>What are some common run time configuration changes?</p>
+</li>
+	
+	<li><p>How do I make these changess?</p>
 </li>
 	
       </ul>
@@ -300,23 +300,34 @@
 
 </blockquote>
 
-<p>The NCAR/CESM consists of many component models which are their own software programs.  These models talk to each other through another piece of software called a coupler. There is yet even another software system, called the Workflow.  It allows us to select various model components and configurations for our experiments.</p>
+<p>The process of going from <code class="language-plaintext highlighter-rouge">history</code> files to <code class="language-plaintext highlighter-rouge">timeseries</code> files and to convert 3D atmospheric data from the model coordinate system to selected pressure levels. We will learn how to use the CESM Postprocessing Tools</p>
 
-<p><img src="../fig/CESMCoupling.png" alt="CESMCoupling" /></p>
+<p>The post processing scripts are located in your ~/scripts/ directory.
+You can find them using ls <em>create</em>.</p>
 
-<h3 id="workflow">Workflow</h3>
+<h4 id="open-the-script-in-a-text-editor-eg-gedit-vi-emacs">Open the script in a text editor (e.g. gedit, vi, emacs)</h4>
 
-<p>The workflow used by CESM is called the Coupling Infrastructure for Modeling Earth (CIME).  It includes:</p>
-<ul>
-  <li>Coupling infrastructure (how do the components talk to each other)</li>
-  <li>Data and stub models (structure to allow componenets to be active or inactive)</li>
-  <li>Testing infrastructure</li>
-  <li>Python scripts and XML configuration files for the Case control system (this is what is important to us for running the model)</li>
-</ul>
+<h4 id="change-the-lines-of-the-script-relevant-for-your-run-for-example-in-atmcreate_timeseriesncl">Change the lines of the script relevant for your run, for example, in `atm.create_timeseries.ncl’</h4>
 
-<p><img src="../fig/CIME.png" alt="CIME" /></p>
+<p>run_name = “test1”
+  styr = 1
+  enyr = 4
+  work_dir = “/glade/scratch/kpegion/”
+  archive_dir = “/glade/scratch/kpegion/archive/”+run_name+”/atm/hist”</p>
 
-<p>CIME is being used by other modeling groups, so learning how to configure and run the CESM using CIME may translate to being able to work with other models.</p>
+<h4 id="run-the-postprocessing-script">Run the postprocessing script</h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ncl atm.create_timeseries.ncl
+</code></pre></div></div>
+
+<h4 id="the-timeseries-files-are-located-in">The timeseries files are located in:</h4>
+<p><code class="language-plaintext highlighter-rouge">/glade/scratch/kpegion/processed/&lt;case name&gt;/</code></p>
+
+<p>You can take a quick look at them in <code class="language-plaintext highlighter-rouge">ncview</code>.
+To do Assignment #2, you can read them in using <code class="language-plaintext highlighter-rouge">xarray</code></p>
+
+<p>Run the post-processing for whichever component is of interest to you.</p>
+
 
 
 
@@ -374,7 +385,7 @@
   <div class="col-xs-1">
     <h3 class="text-left">
       
-      <a href="../01-Two-Models/index.html"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">previous episode</span></a>
+      <a href="../03-diagnostics/index.html"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">previous episode</span></a>
       
     </h3>
   </div>
@@ -384,7 +395,7 @@
   <div class="col-xs-1">
     <h3 class="text-right">
       
-      <a href="../03-NCAR-Computing-Environment/index.html"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span class="sr-only">next episode</span></a>
+      <a href="../"><span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span><span class="sr-only">lesson home</span></a>
       
     </h3>
   </div>

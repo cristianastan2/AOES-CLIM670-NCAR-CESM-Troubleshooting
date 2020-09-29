@@ -19,7 +19,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="last-modified" content="2020-09-15 16:03:29 -0600">
+    <meta http-equiv="last-modified" content="2020-09-29 07:02:11 -0600">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- meta "search-domain" used for google site search function google_search() -->
     <meta name="search-domain" value="">
@@ -47,7 +47,7 @@
     <link rel="icon" type="image/png" href="../assets/favicons/swc/favicon-32x32.png" sizes="32x32" />
     <link rel="icon" type="image/png" href="../assets/favicons/swc/favicon-16x16.png" sizes="16x16" />
     <link rel="icon" type="image/png" href="../assets/favicons/swc/favicon-128.png" sizes="128x128" />
-    <meta name="application-name" content="Software Carpentry - NCAR and CESM Introduction"/>
+    <meta name="application-name" content="Software Carpentry - CESM Troubleshooting"/>
     <meta name="msapplication-TileColor" content="#FFFFFF" />
     <meta name="msapplication-TileImage" content="../assets/favicons/swc/mstile-144x144.png" />
     <meta name="msapplication-square70x70logo" content="../assets/favicons/swc/mstile-70x70.png" />
@@ -64,7 +64,7 @@
 	<![endif]-->
 
   <title>
-  NCAR and CESM Introduction
+  CESM Troubleshooting
   </title>  
 
   </head>
@@ -131,19 +131,16 @@
           <ul class="dropdown-menu">
             
             
-            <li><a href="../01-Two-Models/index.html">CESM and UFS</a></li>
+            <li><a href="../01-Our-Experiments-Troubleshooting/index.html">Our Experiments</a></li>
             
             
-            <li><a href="../02-CESM-Configuration/index.html">CESM Workflow</a></li>
+            <li><a href="../02-history-setup/index.html">History and Setup for Diagnostics</a></li>
             
             
-            <li><a href="../03-NCAR-Computing-Environment/index.html">The NCAR Computing Environment</a></li>
+            <li><a href="../03-diagnostics/index.html">Model Diagnostics Packages</a></li>
             
             
-            <li><a href="../04-Downloading-CESM/index.html">Downloading CESM</a></li>
-            
-            
-            <li><a href="../05-CESM-Quickstart/index.html">CESM Quickstart</a></li>
+            <li><a href="../04-postprocessing/index.html">Postprocessing</a></li>
             
 	    <li role="separator" class="divider"></li>
             <li><a href="../aio/index.html">All in one page (Beta)</a></li>
@@ -198,13 +195,13 @@
 
 
 
-<h1 class="maintitle"><a href="../index.html">NCAR and CESM Introduction</a></h1>
+<h1 class="maintitle"><a href="../index.html">CESM Troubleshooting</a></h1>
 
 
 
 <article>
 
-<h1 id="cesm-and-ufs" class="maintitle">CESM and UFS</h1>
+<h1 id="our-experiments" class="maintitle">Our Experiments</h1>
 
 <blockquote class="objectives">
   <h2>Overview</h2>
@@ -219,13 +216,10 @@
       <strong>Questions</strong>
       <ul>
 	
-	<li><p>What is CESM?</p>
+	<li><p>How can I confirm if everything ran correctly?</p>
 </li>
 	
-	<li><p>How does it differ from UFS?</p>
-</li>
-	
-	<li><p>Why do we use CESM in this class?</p>
+	<li><p>How can I troubleshoot errors?</p>
 </li>
 	
       </ul>
@@ -239,50 +233,320 @@
       <strong>Objectives</strong>
       <ul>
 	
-	<li><p>Understand the differences between these two models</p>
-</li>
-	
-	<li><p>Learn about CESM</p>
-</li>
-	
       </ul>
     </div>
   </div>
 
 </blockquote>
 
-<p>Last week you learned about the NOAA/Unified Forecast System from Dr. Stan.  Today we will learn about the NCAR/Community Earth System Model. How would you know which model you want to use for your work?  Here are some pros/cons of each model.</p>
+<p>We have three cases (or experiments) we are working with.  We will take a look at what happened with each one of them.</p>
 
-<h3 id="noaaunified-forecast-system-ufs">NOAA/Unified Forecast System (UFS) </h3>
+<ol>
+  <li>
+    <dl>
+      <dt>b.day1.0</dt>
+      <dd>This was our first case that ran initially for 5-days.  We then set <code class="language-plaintext highlighter-rouge">CONTINUE_RUN=TRUE</code> and ran it again for another 5-days.
+This run should have completed successfully. How can we confirm this?</dd>
+    </dl>
+  </li>
+</ol>
+
+<blockquote class="challenge">
+  <h2 id="check-your-casestatus-file">Check your CaseStatus file</h2>
+
+  <p>Go to your case directory for this case and look at the end of the <code class="language-plaintext highlighter-rouge">CaseStatus</code> file</p>
+  <div class="language-plaintext source highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tail CaseStatus
+</code></pre></div>  </div>
+</blockquote>
+
+<p>Now let’s check out the output from this case.  Remember, it is located in the DOUT_S_ROOT directory.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cases/b.day1.0&gt; ./xmlquery DOUT_S_ROOT
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+	DOUT_S_ROOT: /glade/scratch/kpegion/archive/b.day1.0
+</code></pre></div></div>
+
+<p>We will go there and see if we now have 10 days of data.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> /glade/scratch/kpegion/archive/b.day1.0
+<span class="nb">cd </span>ocn/hist
+</code></pre></div></div>
+
+<p>We now have two output files for the ocean: <code class="language-plaintext highlighter-rouge">b.day1.0.pop.h.nday1.0001-01-01.nc</code> and <code class="language-plaintext highlighter-rouge">b.day1.0.pop.h.nday1.0001-01-06.nc</code>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">b.day1.0.pop.h.nday1.0001-01-01.nc</code> is the same file we looked at last week which has the first 5-days.<br />
+<code class="language-plaintext highlighter-rouge">b.day1.0.pop.h.nday1.0001-01-06.nc</code> contains the next 5-days that we ran by setting <code class="language-plaintext highlighter-rouge">CONTINUE_RUN=TRUE</code>
+Use ncview to look at these files.</p>
+
+<ol>
+  <li>
+    <dl>
+      <dt>Second case</dt>
+      <dd>This is our case that we are running for 4-years with daily precip and standard monthly output to use for Assignment #2. Assuming the configuration and namelist changes were entered correctly, this run should have completed successfully.</dd>
+    </dl>
+  </li>
+</ol>
+
 <ul>
-  <li>Website: https://www.ufscommunity.org/</li>
-  <li>UFS is not yet easy to run for research purposes</li>
-  <li>Challenging to modify for a specific purpose, but this will improve in the future – concerted effort to document and provide community support</li>
-  <li>The “public release” version is only the Atm &amp; Land components, although experimental unsupported atm-land-ocn versions exist.</li>
-  <li>Existing, publicly available experiments consist of Atm/Land model re-forecasts and real-time forecasts</li>
-  <li>Its primary mission is centered around prediction</li>
-  <li>Components consist of Atm, Land, Ocn, Sea Ic, Aerosol, Ionosphere, Storm Surge, Waves</li>
-  <li>Using the UFS for research has the potential to directly feedback to improving operational predictions.</li>
-  <li>Several people in AOES work with this model as a research tool (e.g. Stan, Cash, Kinter)</li>
+  <li>Check your <code class="language-plaintext highlighter-rouge">CaseStatus</code> file.</li>
+  <li>If errors, check your log file</li>
+  <li>If no errors, check your output:</li>
 </ul>
 
-<p><img src="../fig/UFSComponents.png" alt="UFS" /></p>
+<p>There should be monthly and daily output for the atmosphere. Let’s confirm:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> /glade/scratch/kpegion/archive/test1/atm/hist
+<span class="nb">ls</span>
+</code></pre></div></div>
 
-<h3 id="ncarcommunity-earth-system-model-cesm">NCAR/Community Earth System Model (CESM)</h3>
-<ul>
-  <li>Designed for community use – easy to use for research</li>
-  <li>Large community of people working with CESM – Organized in working groups that are open to all (http://www.cesm.ucar.edu/working_groups/)</li>
-  <li>Easy to get help, lots of documentation: (http://www.cesm.ucar.edu/)</li>
-  <li>CESM has different (and more) Earth system components</li>
-  <li>Many components can be combined together in endless combinations</li>
-  <li>Easy to change configuration (e.g. output frequency, grid).</li>
-  <li>Primary mission is climate oriented</li>
-  <li>Many existing climate simulations and now hindcasts (CMIP, large ensemble, decadal prediction, S2S prediction)</li>
-  <li>More recently starting to be used for prediction/predictability purposes (e.g. new Earth System Prediction Working Group).</li>
-  <li>Lots of people in AOES work with this model.</li>
-</ul>
+<p>The <code class="language-plaintext highlighter-rouge">test1.cam.h0.*.nc</code> files contain monthly averaged data.</p>
 
-<p><img src="../fig/CESMComponents.png" alt="CESM" /></p>
+<p>The <code class="language-plaintext highlighter-rouge">test1.cam.h1.*.nc</code> contain daily averaged data.</p>
+
+<blockquote class="challenge">
+  <h2 id="what-is-in-these-files">What is in these files?</h2>
+
+  <p>We will look at each file using <code class="language-plaintext highlighter-rouge">ncdump -h</code> to understand what is in the files.</p>
+
+  <p>What variables are in the h0 files?
+What variables are in the h1 files?</p>
+
+  <p>We set this with the namelist options</p>
+
+  <p><code class="language-plaintext highlighter-rouge">fincl2 = 'PRECC', 'PRECL'</code></p>
+
+  <p><code class="language-plaintext highlighter-rouge">nhtfrq = 0, -24</code></p>
+
+  <p>How many times are in the h0 files?</p>
+
+  <p>How many times are in the h1 files?</p>
+
+  <p>We set this with the <code class="language-plaintext highlighter-rouge">mfilt = 1,1</code> namelist option.</p>
+
+  <p>Remember, you can look up namelist <a href="http://www.cesm.ucar.edu/models/cesm2/settings/current/">options</a></p>
+
+  <dl>
+    <dt>mfilt</dt>
+    <dd>Array containing the maximum number of time samples written to a history file.  The first value applies to the primary history file, the second through tenth to the auxillary history files.  Default: 1,30,30,30,30,30,30,30,30,30</dd>
+  </dl>
+
+</blockquote>
+
+<p>We have lots of history files and we can look at each of them using <code class="language-plaintext highlighter-rouge">ncview</code>, but that is not very useful.</p>
+
+<p>We can read in all the files using Python <code class="language-plaintext highlighter-rouge">xarray</code>, but its a lot of data.</p>
+
+<p>There are some useful tools for postprocessing the data to get <code class="language-plaintext highlighter-rouge">timeseries</code> files and easily take a look at some common diagnostics.  We will learn about those later in this class.</p>
+
+<ol>
+  <li>
+    <dl>
+      <dt>BRANCH case:</dt>
+      <dd>This is the branch case we ran with lots of configuration changes and namelist changes.  This run produces an error with the configuration provided.</dd>
+    </dl>
+  </li>
+</ol>
+
+<p>We can review how we created and setup our run by looking at the first line of the <code class="language-plaintext highlighter-rouge">README.case</code> file:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cases/branchwrong&gt; <span class="nb">head</span> <span class="nt">-n1</span> README.case
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2020-09-28 09:07:01: ./create_newcase --case /glade/u/home/kpegion/cases/branchwrong --res f19_g17 --compset B1850 --project UGMU0035
+</code></pre></div></div>
+
+<p>You can see that I initially made a mistake in my <code class="language-plaintext highlighter-rouge">create_newcase</code> by mistyping the project number.</p>
+
+<p>We can review any changes we made to the configuration of the run by looking at <code class="language-plaintext highlighter-rouge">CaseStatus</code></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cases/branchwrong&gt; more CaseStatus
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2020-09-28 09:13:01: xmlchange success &lt;command&gt; ./xmlchange RUN_TYPE=branch,RUN_REFCASE=b.day1.0,RUN_REFDATE=0001-01-05,CLM_NAMELIST_OPTS=,GET_REFCA
+SE=FALSE,STOP_OPTION=nmonths,STOP_N=1,RESUBMIT=1,CCSM_CO2_PPMV=569.4  &lt;/command&gt;
+ ---------------------------------------------------
+2020-09-28 09:13:20: xmlchange success &lt;command&gt; ./xmlchange JOB_WALLCLOCK_TIME=2:00:00  &lt;/command&gt;
+ ---------------------------------------------------
+2020-09-28 09:13:24: case.setup starting
+ ---------------------------------------------------
+2020-09-28 09:13:25: case.setup success
+ ---------------------------------------------------
+2020-09-28 09:29:20: case.build starting
+ ---------------------------------------------------
+CESM version is cesm2.1.1-exp17
+Processing externals description file : Externals.cfg
+Processing externals description file : Externals_CLM.cfg
+Processing externals description file : Externals_POP.cfg
+Processing externals description file : Externals_CISM.cfg
+Checking status of externals: clm, fates, ptclm, mosart, ww3, cime, cice, pop, cvmix, marbl, cism, source_cism, rtm, cam,
+    ./cime
+        clean sandbox, on cime5.6.19
+    ./components/cam
+        clean sandbox, on cam1/release_tags/cam_cesm2_1_rel_29/components/cam
+    ./components/cice
+        clean sandbox, on cice5_cesm2_1_1_20190321
+    ./components/cism
+        clean sandbox, on release-cesm2.0.04
+    ./components/cism/source_cism
+        clean sandbox, on release-cism2.1.03
+    ./components/clm
+        clean sandbox, on release-clm5.0.25
+    ./components/clm/src/fates
+        clean sandbox, on fates_s1.21.0_a7.0.0_br_rev2
+    ./components/clm/tools/PTCLM
+        clean sandbox, on PTCLM2_180611
+    ./components/mosart
+        clean sandbox, on release-cesm2.0.03
+    ./components/pop
+        clean sandbox, on pop2_cesm2_1_rel_n06
+    ./components/pop/externals/CVMix
+        clean sandbox, on v0.93-beta
+    ./components/pop/externals/MARBL
+        clean sandbox, on cesm2.1-n00
+    ./components/rtm
+        clean sandbox, on release-cesm2.0.02
+    ./components/ww3
+        clean sandbox, on ww3_181001
+2020-09-28 09:38:13: case.build success
+ ---------------------------------------------------
+2020-09-28 09:38:27: case.submit starting
+ ---------------------------------------------------
+2020-09-28 09:38:35: case.submit error
+ERROR: Command: 'qsub -q regular -l walltime=2:00:00 -A UGMU0035 -v ARGS_FOR_SCRIPT='--resubmit' .case.run' failed with error 'qsub: Invalid account, available ac
+counts:
+Project, Status, Active
+P05010048, Normal, True
+P93300190, Overspent, True
+UGMU0032, Normal, True
+P93300042, Overspent, True' from dir '/glade/u/home/kpegion/cases/branchwrong'
+ ---------------------------------------------------
+2020-09-28 09:39:35: xmlchange success &lt;command&gt; ./xmlchange PROJECT=UGMU0032  &lt;/command&gt;
+ ---------------------------------------------------
+2020-09-28 09:39:51: case.submit starting
+ ---------------------------------------------------
+2020-09-28 09:39:58: case.submit success case.run:4355823.chadmin1.ib0.cheyenne.ucar.edu, case.st_archive:4355824.chadmin1.ib0.cheyenne.ucar.edu
+ ---------------------------------------------------
+2020-09-28 11:01:58: case.run starting
+ ---------------------------------------------------
+2020-09-28 11:02:04: model execution starting
+ ---------------------------------------------------
+2020-09-28 11:02:07: model execution success
+ ---------------------------------------------------
+2020-09-28 11:02:07: case.run error
+ERROR: RUN FAIL: Command 'mpiexec_mpt -p "%g:"  -np 576  omplace -tm open64  /glade/scratch/kpegion/branchwrong/bld/cesm.exe  &gt;&gt; cesm.log.$LID 2&gt;&amp;1 '
+ failed
+See log file for details: /glade/scratch/kpegion/branchwrong/run/cesm.log.4355823.chadmin1.ib0.cheyenne.ucar.edu.200928-110158
+ ---------------------------------------------------
+</code></pre></div></div>
+
+<p>Another thing we did that is not documented automatically is to copy the restart files from our <code class="language-plaintext highlighter-rouge">b.day1.0</code> case to our new run directory. This was so the model has a set of restart files to start the run from.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cp</span> /glade/scratch/kpegion/archive/b.day1.0/rest/0001-01-06-00000/<span class="k">*</span> /glade/scratch/kpegion/test1/run/ 
+</code></pre></div></div>
+
+<h3 id="how-do-we-figure-out-what-went-wrong">How do we figure out what went wrong?</h3>
+
+<p>Look at your log file and use <code class="language-plaintext highlighter-rouge">grep -i</code> to find errors.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cases/branchwrong&gt; <span class="nb">grep</span> <span class="nt">-i</span> error /glade/scratch/kpegion/branchwrong/run/cesm.log.4355823.chadmin1.ib0.cheyenne.ucar.edu.200928-110158
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>16: ERROR: GETFIL: FAILED to get b.day1.0.cam.r.0001-01-05-00000.nc
+4: ERROR: GETFIL: FAILED to get b.day1.0.cam.r.0001-01-05-00000.nc
+29: ERROR: GETFIL: FAILED to get b.day1.0.cam.r.0001-01-05-00000.nc
+33: ERROR: GETFIL: FAILED to get b.day1.0.cam.r.0001-01-05-00000.nc
+34: ERROR: GETFIL: FAILED to get b.day1.0.cam.r.0001-01-05-00000.nc
+3: ERROR: GETFIL: FAILED to get b.day1.0.cam.r.0001-01-05-00000.nc
+22: ERROR: GETFIL: FAILED to get b.day1.0.cam.r.0001-01-05-00000.nc
+18: ERROR: GETFIL: FAILED to get b.day1.0.cam.r.0001-01-05-00000.nc
+...
+</code></pre></div></div>
+
+<p><em>Why is the error repeated many times?</em></p>
+
+<p>The model runs on many processors.  Each one is reporting the error.</p>
+
+<p><em>What does the error mean?</em></p>
+
+<p>This is telling that the model is trying to get a file called <code class="language-plaintext highlighter-rouge">b.day1.0.cam.r.0001-01-05-00000.nc</code> and it is unable to get it.</p>
+
+<p>Let’s go back to our configuration and think back about how we set up this experiment. What do all the configuration changes mean?
+We can take a look in <code class="language-plaintext highlighter-rouge">env_run.xml</code> to confirm what each setting means.</p>
+
+<dl>
+  <dt>RUN_TYPE=branch</dt>
+  <dd>This is a branch run</dd>
+  <dt>RUN_REFCASE=b.day1.0</dt>
+  <dd>Reference directory containing RUN_REFCASE data - used for hybrid or branch runs</dd>
+  <dt>RUN_REFDATE=0001-01-05</dt>
+  <dd>Reference date for hybrid or branch runs (yyyy-mm-dd)</dd>
+  <dt>CLM_NAMELIST_OPTS=’’</dt>
+  <dd>CLM-specific namelist settings for -namelist option in the CLM
+    build-namelist. CLM_NAMELIST_OPTS is normally set as a compset variable
+    and in general should not be modified for supported compsets.
+    It is recommended that if you want to modify this value for your experiment,
+    you should use your own user-defined component sets via using create_newcase
+    with a compset_file argument.
+    This is an advanced flag and should only be used by expert users.</dd>
+</dl>
+
+<p>It seems this option was provided in the NCAR tutorial example, but is not necessary.</p>
+
+<dl>
+  <dt>GET_REFCASE=FALSE</dt>
+  <dd>Flag for automatically prestaging the refcase restart dataset. If TRUE, then the refcase data is prestaged into the executable directory</dd>
+  <dt>STOP_OPTION=nmonths</dt>
+  <dd>Sets the run length along with STOP_N and STOP_DATE</dd>
+  <dt>STOP_N=1</dt>
+  <dd>Provides a numerical count for $STOP_OPTION.</dd>
+  <dt>RESUBMIT=1</dt>
+  <dd>If RESUBMIT is greater than 0, then case will automatically resubmit
+Since we later set our queue time to only 2 hours, there may be a need to resubmit to complete the run.</dd>
+  <dt>CCSM_CO2_PPMV=569.4</dt>
+  <dd>Mechanism for setting the CO2 value in ppmv for CLM if CLM_CO2_TYPE is constant or for POP if OCN_CO2_TYPE is constant.  This is the CO2 value that gets propogated to the ocean and land models.</dd>
+  <dt>JOB_WALLCLOCK_TIME=2:00:00</dt>
+  <dd>The machine wallclock setting.
+This means how long we tell it to run in the queue.  The maximum and default are 12:00:00, but we can get our run in 
+more quickly if we tell it we need less time.</dd>
+</dl>
+
+<blockquote class="challenge">
+  <h2 id="do-you-see-anything-in-the-configuration-that-could-have-led-to-our-error">Do you see anything in the configuration that could have led to our error?</h2>
+
+  <p>Look at the <code class="language-plaintext highlighter-rouge">RUN_REFDATE</code> and the date we used for our restart file</p>
+
+  <blockquote class="solution">
+    <h2 id="solution">Solution</h2>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">RUN_REFDATE</span><span class="o">=</span>0001-01-06
+<span class="nb">cp</span> /glade/scratch/kpegion/archive/b.day1.0/rest/0001-01-06-00000/<span class="k">*</span> /glade/scratch/kpegion/test1/run/ 
+</code></pre></div>    </div>
+
+  </blockquote>
+
+  <p>Fix it!</p>
+
+</blockquote>
+
+<p>What did those namelist changes do?</p>
+
+<p><a href="http://www.cesm.ucar.edu/models/cesm2/settings/current/">We can look them up</a></p>
+
+<p>In <code class="language-plaintext highlighter-rouge">user_nl_cam</code></p>
+
+<dl>
+  <dt>co2vmr=569.4e-6</dt>
+  <dd>CO2 volume mixing ratio.  This is used as the time invariant surface value of CO2 if no time varying values are specified.  Default: set by build-namelist.</dd>
+  <dt>ch4vmr = 1583.2e-9</dt>
+  <dd>CH4 volume mixing ratio.  This is used as the time invariant surface value of CH4 if no time varying values are specified.  Default: set by build-namelist.</dd>
+  <dt>inithist=’MONTHLY’</dt>
+  <dd>Frequency that initial files will be output
+This produces initial condition files monthly.</dd>
+</dl>
+
+<p>Nothing looks questionable there.</p>
+
+<p>Resubmit your case!</p>
 
 <blockquote class="keypoints">
   <h2>Key Points</h2>
@@ -296,7 +560,7 @@
 
 <hr />
 
-<h1 id="cesm-workflow" class="maintitle">CESM Workflow</h1>
+<h1 id="history-and-setup-for-diagnostics" class="maintitle">History and Setup for Diagnostics</h1>
 
 <blockquote class="objectives">
   <h2>Overview</h2>
@@ -311,7 +575,10 @@
       <strong>Questions</strong>
       <ul>
 	
-	<li><p>What is the CESM Workflow?</p>
+	<li><p>What is in our history files?</p>
+</li>
+	
+	<li><p>How do I setup to run the postprocessing and diagnostics packages</p>
 </li>
 	
       </ul>
@@ -331,401 +598,461 @@
 
 </blockquote>
 
-<p>The NCAR/CESM consists of many component models which are their own software programs.  These models talk to each other through another piece of software called a coupler. There is yet even another software system, called the Workflow.  It allows us to select various model components and configurations for our experiments.</p>
+<p>We will now return to the output from our 4-year case.  Let’s go to the atmospheric history directory for our case.
+If your 4-year case did not run to completion, you are welcome to look at mine.</p>
 
-<p><img src="../fig/CESMCoupling.png" alt="CESMCoupling" /></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> /glade/scratch/kpegion/archive/test1/atm/hist
+</code></pre></div></div>
 
-<h3 id="workflow">Workflow</h3>
+<h3 id="history-vs-timeseries-files">History vs. Timeseries Files</h3>
 
-<p>The workflow used by CESM is called the Coupling Infrastructure for Modeling Earth (CIME).  It includes:</p>
+<dl>
+  <dt>History files</dt>
+  <dd>contain all of the variables for a componenet for a particular frequency and are output directly by the model.</dd>
+  <dt>Timeseries files</dt>
+  <dd>usually span a number of timesteps and contain only one major variable.  They are created offline.</dd>
+</dl>
+
+<p>When NCAR provides output from their model simulations publicly, they typically provide timeseries files for a select set of variables.</p>
+
+<p>Examples:</p>
+
+<p>A history file: <code class="language-plaintext highlighter-rouge">f40_test.cam.h0.1993-11.nc</code></p>
 <ul>
-  <li>Coupling infrastructure (how do the components talk to each other)</li>
-  <li>Data and stub models (structure to allow componenets to be active or inactive)</li>
-  <li>Testing infrastructure</li>
-  <li>Python scripts and XML configuration files for the Case control system (this is what is important to us for running the model)</li>
+  <li>1 monthly timestep (Nov 1993)</li>
+  <li>200+ CAM varaibles</li>
 </ul>
 
-<p><img src="../fig/CIME.png" alt="CIME" /></p>
-
-<p>CIME is being used by other modeling groups, so learning how to configure and run the CESM using CIME may translate to being able to work with other models.</p>
-
-<blockquote class="keypoints">
-  <h2>Key Points</h2>
-  <ul>
-    
-  </ul>
-</blockquote>
-
-<hr />
-
-<h1 id="the-ncar-computing-environment" class="maintitle">The NCAR Computing Environment</h1>
-
-<blockquote class="objectives">
-  <h2>Overview</h2>
-
-  <div class="row">
-    <div class="col-md-3">
-      <strong>Teaching:</strong> 0 min
-      <br />
-      <strong>Exercises:</strong> 0 min
-    </div>
-    <div class="col-md-9">
-      <strong>Questions</strong>
-      <ul>
-	
-	<li><p>How do I use the NCAR Computers?</p>
-</li>
-	
-      </ul>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-3">
-    </div>
-    <div class="col-md-9">
-      <strong>Objectives</strong>
-      <ul>
-	
-      </ul>
-    </div>
-  </div>
-
-</blockquote>
-
-<p>You have now have accounts on the NCAR computers <code class="language-plaintext highlighter-rouge">cheyenne.ucar.edu</code> and <code class="language-plaintext highlighter-rouge">casper.ucar.edu</code>.</p>
-
-<p>Login to <code class="language-plaintext highlighter-rouge">cheyenne</code></p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>ssh <span class="nt">-X</span> <span class="nt">-l</span> username cheyenne.ucar.edu
-</code></pre></div></div>
-
-<p>Follow the instructions you received regarding Duo 2-factor authentication</p>
-
-<p><img src="../fig/Cheyenne.png" alt="Cheyenne" /></p>
-
-<p>Cheyenne is a supercomputer, but to the user it is just like any Unix computer and we run the same Unix commands here.</p>
-
-<blockquote class="challenge">
-  <h2 id="your-home-directory-on-ncar">Your home directory on NCAR</h2>
-
-  <p>Use the <code class="language-plaintext highlighter-rouge">pwd</code> command to see what your home directory is called.</p>
-
-</blockquote>
-
-<p>To run a model we will need disk space beyond just our home directory.  By default, with your NCAR account, you have space in your home directory, a temporary space called <code class="language-plaintext highlighter-rouge">scratch</code> and a <code class="language-plaintext highlighter-rouge">work</code> directory all under a system called the GLADE shared file system.  How do I know what directories I have and how much space is available?</p>
-
-<blockquote class="challenge">
-  <h2 id="your-disk-space-on-glade">Your disk space on glade</h2>
-
-  <p>Use the <code class="language-plaintext highlighter-rouge">gladequota</code> command to see</p>
-
-  <p>Note that only the home directory is backed up.</p>
-
-</blockquote>
-
-<p><img src="../fig/GLADE.png" alt="Cheyenne" /></p>
-
-<blockquote class="keypoints">
-  <h2>Key Points</h2>
-  <ul>
-    
-  </ul>
-</blockquote>
-
-<hr />
-
-<h1 id="downloading-cesm" class="maintitle">Downloading CESM</h1>
-
-<blockquote class="objectives">
-  <h2>Overview</h2>
-
-  <div class="row">
-    <div class="col-md-3">
-      <strong>Teaching:</strong> 0 min
-      <br />
-      <strong>Exercises:</strong> 0 min
-    </div>
-    <div class="col-md-9">
-      <strong>Questions</strong>
-      <ul>
-	
-	<li><p>How do I download CESM?</p>
-</li>
-	
-      </ul>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-3">
-    </div>
-    <div class="col-md-9">
-      <strong>Objectives</strong>
-      <ul>
-	
-      </ul>
-    </div>
-  </div>
-
-</blockquote>
-
-<p>We will now download the model and all the setup files needed for it. These are one-time steps.</p>
-
-<p>Go to your <code class="language-plaintext highlighter-rouge">/glade/work/</code> directory</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> /glade/work/kpegion
-</code></pre></div></div>
-
-<p>Download the CESM from Github</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git clone <span class="nt">-b</span> release-cesm2.1.1 https://github.com/ESCOMP/cesm.git cesm2.1.1 
-</code></pre></div></div>
-
-<p>Change to the <code class="language-plaintext highlighter-rouge">cesm2.1.1</code> directory</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd </span>cesm2.1.1
-</code></pre></div></div>
-
-<p>Let’s take a look in that directory and talk about what is there and what is not.
-Need to get the model components.</p>
-
-<p>Checkout all the model components</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>./manage_externals/checkout_externals
-</code></pre></div></div>
-
-<p>Sometimes this hangs and gives an error about connecting.  If it does, try again. If it asks you a question about the certificate, you can select <code class="language-plaintext highlighter-rouge">p</code> for permanent.</p>
-
-<p>Leave this running over break.</p>
-
-<blockquote class="keypoints">
-  <h2>Key Points</h2>
-  <ul>
-    
-  </ul>
-</blockquote>
-
-<hr />
-
-<h1 id="cesm-quickstart" class="maintitle">CESM Quickstart</h1>
-
-<blockquote class="objectives">
-  <h2>Overview</h2>
-
-  <div class="row">
-    <div class="col-md-3">
-      <strong>Teaching:</strong> 0 min
-      <br />
-      <strong>Exercises:</strong> 0 min
-    </div>
-    <div class="col-md-9">
-      <strong>Questions</strong>
-      <ul>
-	
-	<li><p>How do I setup and run the CESM?</p>
-</li>
-	
-      </ul>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-3">
-    </div>
-    <div class="col-md-9">
-      <strong>Objectives</strong>
-      <ul>
-	
-      </ul>
-    </div>
-  </div>
-
-</blockquote>
-
-<p>You have now downloaded all the model components and the CIME workflow. Let’s take a look:
-From your <code class="language-plaintext highlighter-rouge">/glade/work/username/cesm2.1.1</code> directory, see what is there.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls</span>
-</code></pre></div></div>
-
-<blockquote class="challenge">
-  <h2 id="what-was-added-after-running-manage_externals">What was added after running <code class="language-plaintext highlighter-rouge">manage_externals</code></h2>
-
-</blockquote>
-
-<h4 id="organization-of-the-cesm-directory">Organization of the CESM Directory</h4>
-
-<p>CESM has a set of keywords that refer to specific directories, they are:</p>
+<p>A timeseries file: <code class="language-plaintext highlighter-rouge">f40_test.cam.h0.PSL.199001-199912.nc</code></p>
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">SRCROOT</code> - Path to your CESM code; contains <code class="language-plaintext highlighter-rouge">CIMEROOT</code></li>
-  <li><code class="language-plaintext highlighter-rouge">CIMEROOT</code> - Path of your CIME directory which is sub-directory under <code class="language-plaintext highlighter-rouge">SRCROOT</code></li>
-  <li><code class="language-plaintext highlighter-rouge">CASEROOT</code> - Path to your case directories</li>
-  <li><code class="language-plaintext highlighter-rouge">OBJROOT</code> - Path to your build directory</li>
-  <li><code class="language-plaintext highlighter-rouge">EXEROOT</code> - Path to your run directory</li>
-  <li><code class="language-plaintext highlighter-rouge">DOUT_S_ROOT</code> - Path to your archived data directory</li>
+  <li>120 monthly timesteps (Jan 1990-Dec1999)</li>
+  <li>1 CAM variable (PSL), along with coordinate variables like <code class="language-plaintext highlighter-rouge">time</code>,<code class="language-plaintext highlighter-rouge">lat</code>,’lon`,etc.</li>
 </ul>
 
-<blockquote class="challenge">
-  <h2 id="find-your-srcroot-and-cimeroot">Find your SRCROOT and CIMEROOT</h2>
+<h3 id="cesm-time-variable">CESM Time Variable</h3>
 
-  <p>Your SRCROOT and CIMEROOT exist after downloading the CESM.  What are the exact paths for you?</p>
+<p>The time coordinate variable in CESM history and timeseries files represents <em>the end</em> of the averaging period for variables that are averages.  The time that gets resolved when the data are read in does not match the date in the filename. For monthly averaged data, the filename is correct.  This can be a source of much confusion.</p>
+
+<p>Example: <code class="language-plaintext highlighter-rouge">test1.cam.h0.0001-05.nc</code></p>
+<ul>
+  <li>This is a history file for may of year one of our run.</li>
+  <li>When you read in this file, the first time is resolved as: <code class="language-plaintext highlighter-rouge">0001-06-01</code>.  This means that Jun 1 of year 0001 is the end of the averaging period and the data contains the average for May of year 1.</li>
+  <li>To verify the averaging period in the files, consult the <code class="language-plaintext highlighter-rouge">time_bnds</code>, <code class="language-plaintext highlighter-rouge">time_bound</code>, or <code class="language-plaintext highlighter-rouge">time_bounds</code> variable. Always check!!!!</li>
+  <li>This is a convention used by CESM to allow averaged and instantaneous variables to be stored in the same file.</li>
+</ul>
+
+<h3 id="postprocessing">Postprocessing</h3>
+
+<p>The process of going from <code class="language-plaintext highlighter-rouge">history</code> files to <code class="language-plaintext highlighter-rouge">timeseries</code> files and to convert 3D atmospheric data from the model coordinate system to selected pressure levels. We will learn how to use the CESM Postprocessing Tools which are primarily written in NCAR Command Language (NCL).  NCL is in the process of being converted to Python, but for now, we can use the preprepared NCL scripts without having to know too much NCL.</p>
+
+<h3 id="diagnostics-packages">Diagnostics Packages</h3>
+
+<p>There is a large suite of postprocessing and diagnostic packages developed by NCAR using a combination of NCL and Python scripts that automatically generate a variety of different kinds of plots from model output files and used to evaluate a simulation. They all compute a series of pre-defined metrics and display the plots via a website.</p>
+
+<p>There are five main diagnostics packages:</p>
+<ol>
+  <li>Atmosphere</li>
+  <li>Ice</li>
+  <li>Land</li>
+  <li>Ocean</li>
+  <li>Climate Variability and Diagnostics Package (CVDP)</li>
+</ol>
+
+<h3 id="postprocessing-and-diagnostics-packages-setup">Postprocessing and Diagnostics Packages Setup</h3>
+
+<p>We will setup everything necessary for you to be able to run the postprocessing and diagnostics packages on the NCAR computers.</p>
+
+<h4 id="setup-your-profile-or-tcshrc">Setup your <code class="language-plaintext highlighter-rouge">.profile</code> or <code class="language-plaintext highlighter-rouge">.tcshrc</code></h4>
+
+<p>If you have never setup a <code class="language-plaintext highlighter-rouge">.profile</code> or <code class="language-plaintext highlighter-rouge">.tcshrc</code> on cheyenne:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cp</span> /glade/u/home/kpegion/clim670/profile.sample ~/.profile
+</code></pre></div></div>
+
+<p>If you already have a <code class="language-plaintext highlighter-rouge">.profile</code> (bash users) or a <code class="language-plaintext highlighter-rouge">.tcshrc</code> (tcsh users), look at the corresponding file and add the necessary items from the sample file to your file.  The sample files are located in: <code class="language-plaintext highlighter-rouge">~kpegion/clim670/</code></p>
+
+<h4 id="copy-the-post-processing-scripts-to-the-correct-location">Copy the post-processing scripts to the correct location:</h4>
+
+<p>Go to your home directory:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span>
+</code></pre></div></div>
+
+<p>Create a scripts directory and go to it:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir </span>scripts
+<span class="nb">cd </span>scripts
+</code></pre></div></div>
+
+<p>Copy all files needed:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cp</span> <span class="nt">-R</span> /glade/u/home/asphilli/CESM_tutorial/<span class="k">*</span> <span class="nb">.</span>
+</code></pre></div></div>
+
+<p>You may get an error about being able to copy a particular file. You can ignore the error.</p>
+
+<p>Put the configuration file into the correct location:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mv </span>hluresfile ../.hluresfile
+</code></pre></div></div>
+
+<h4 id="setup-the-python-environment-for-the-cesm-diagnostics-and-post-processing-scripts">Setup the python environment for the CESM diagnostics and post-processing scripts</h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cesm_pp_activate 
+</code></pre></div></div>
+
+<h4 id="create-a-directory-for-the-cesm-postprocessing-code">Create a directory for the CESM postprocessing code:</h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> /glade/scratch/kpegion/cesm-postprocess
+</code></pre></div></div>
+
+<h4 id="run-the-postprocessing-using-create_postprocess-and-tell-it-the-name-of-your-4-year-case">Run the postprocessing using <code class="language-plaintext highlighter-rouge">create_postprocess</code> and tell it the name of your 4-year case</h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>create_postprocess <span class="nt">--caseroot</span> /glade/scratch/kpegion/cesm-postprocess/test1
+</code></pre></div></div>
+
+<h4 id="go-to-the-postprocessing-directory">Go to the postprocessing directory:</h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> /glade/scratch/kpegion/cesm-postprocess/test1
+</code></pre></div></div>
+
+<h4 id="set-the-location-of-the-model-data">Set the location of the model data:</h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./pp_config <span class="nt">--set</span> <span class="nv">DOUT_S_ROOT</span><span class="o">=</span>/glade/scratch/kpegion/archive/test1
+</code></pre></div></div>
+
+<h4 id="tell-the-diagnostics-what-kinds-of-grids-to-expect-our-version-uses">Tell the diagnostics what kinds of grids to expect, our version uses:</h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./pp_config <span class="nt">--set</span> <span class="nv">ATM_GRID</span><span class="o">=</span>1.9x2.5
+./pp_config <span class="nt">--set</span> <span class="nv">LND_GRID</span><span class="o">=</span>1.9x2.5
+./pp_config <span class="nt">--set</span> <span class="nv">ICE_GRID</span><span class="o">=</span>gx1v7
+./pp_config <span class="nt">--set</span> <span class="nv">OCN_GRID</span><span class="o">=</span>gx1v7
+./pp_config <span class="nt">--set</span> <span class="nv">ICE_NX</span><span class="o">=</span>320
+./pp_config <span class="nt">--set</span> <span class="nv">ICE_NY</span><span class="o">=</span>384
+</code></pre></div></div>
+
+<blockquote class="keypoints">
+  <h2>Key Points</h2>
+  <ul>
+    
+  </ul>
+</blockquote>
+
+<hr />
+
+<h1 id="model-diagnostics-packages" class="maintitle">Model Diagnostics Packages</h1>
+
+<blockquote class="objectives">
+  <h2>Overview</h2>
+
+  <div class="row">
+    <div class="col-md-3">
+      <strong>Teaching:</strong> 0 min
+      <br />
+      <strong>Exercises:</strong> 0 min
+    </div>
+    <div class="col-md-9">
+      <strong>Questions</strong>
+      <ul>
+	
+	<li><p>How do I run the model diagnostics packages?</p>
+</li>
+	
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-9">
+      <strong>Objectives</strong>
+      <ul>
+	
+      </ul>
+    </div>
+  </div>
 
 </blockquote>
 
-<h4 id="cimeroot">CIMEROOT</h4>
+<h3 id="some-requirements-for-the-diagnostics-packages">Some requirements for the diagnostics packages</h3>
 
-<p>The cime subdirectory contains a subdirectory called <code class="language-plaintext highlighter-rouge">scripts</code>.  This is the directory we will use initially for setting up the model.
-Change into this subdirectory and take a look.</p>
+<p>Each component diagnostics package has minimum requirements for how much data must be available to run them:</p>
+<ul>
+  <li>Ocean: 12months</li>
+  <li>Atmosphere, Land: 14 months</li>
+  <li>Ice: 24 months</li>
+</ul>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd </span>cime/scripts
-<span class="nv">$ </span><span class="nb">ls</span>
-</code></pre></div></div>
+<p>Some other requirements:</p>
+<ul>
+  <li>Only complete years can be analyzed by the packages.</li>
+  <li>There must be an additional Dec before the 1st analyzed year or an additional Jan and Feb after the last analyzed year.</li>
+  <li>If you have 4 complete years, you must set the first year to analyze to 1 and the last year to 3 or the first year to 2 and the last year to 4.</li>
+</ul>
 
-<p>The final one-time step is to create a directory called <code class="language-plaintext highlighter-rouge">cases</code> in your home directory.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir</span> ~/cases
-</code></pre></div></div>
+<h3 id="run-a-diagnostics-package">Run a Diagnostics Package</h3>
 
-<p>The cases directory (also called your <code class="language-plaintext highlighter-rouge">CASEROOT</code>) will contain all the source code and configuration files for your model experiments.<br />
-Why do you think we would put something like this in our home directory?</p>
-
-<h3 id="model-quickstart">Model Quickstart</h3>
-
-<p>Above were the one-time setup setps, now we move on to the steps you will do everytime to setup a new model experiment and run it.</p>
-
-<p>Go into the scripts subdirectory in your <code class="language-plaintext highlighter-rouge">CIMEROOT</code></p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> /glade/work/kpegion/cesm2.1.1/cime/scripts
-</code></pre></div></div>
-
-<p>Create a new case</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>./create_newcase <span class="nt">--cases</span> ~/cases/b.day1.0 <span class="nt">--res</span> f19_g17 <span class="nt">--compset</span> B1850 <span class="nt">--project</span> UGMU0032
-</code></pre></div></div>
-
-<p>This created a new subdirectory for your new case. Change to that directory.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> ~/cases/b.day1.0 
-</code></pre></div></div>
-
-<p>Setup the case</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>./case_setup
-</code></pre></div></div>
-
-<p>Build the executable (this will take while)</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>qcmd <span class="nt">--</span> ./case.build
-</code></pre></div></div>
-
-<p>This will take awhile.  While the model is compiling, we will talk about what the <code class="language-plaintext highlighter-rouge">create_newcase</code> command did.</p>
+<p>Select and run a diagnostics package of interest to you:</p>
 
 <blockquote class="callout">
-  <h2 id="potential-errors">Potential Errors</h2>
+  <h2 id="atmosphere-diagnostics-package">Atmosphere Diagnostics Package</h2>
 
-  <p>Some users received an error indicating that their account was overspent or expired. This happened to users who already had a NCAR account associated with a project charge code that was no longer available.  To resolve this, set the <code class="language-plaintext highlighter-rouge">PBS_ACCOUNT</code> environment variable to a valid charge code for this class.</p>
-  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">export </span><span class="nv">PBS_ACCOUNT</span><span class="o">=</span>UGMU0032
+  <p>Edit the settings for the <code class="language-plaintext highlighter-rouge">env_diags_atm.xml</code> file using <code class="language-plaintext highlighter-rouge">pp_config</code></p>
+
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./pp_config <span class="nt">--set</span> <span class="nv">ATMDIAG_OUTPUT_ROOT_PATH</span><span class="o">=</span>/glade/scratch/kpegion/diagnostics-output/atm
+./pp_config <span class="nt">--set</span> <span class="nv">ATMDIAG_test_first_yr</span><span class="o">=</span>1
+./pp_config <span class="nt">--set</span> <span class="nv">ATMDIAG_test_nyrs</span><span class="o">=</span>3
 </code></pre></div>  </div>
-  <p>This setting will go away after you logout, so you will need to set it everytime for the correct project charge code associated with the project you are working on.</p>
+
+  <p>Run the monthly climatologies</p>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>qsub atm_averages <span class="nt">-A</span> UGMU0032
+</code></pre></div>  </div>
+
+  <p>You can monitor your job status using <code class="language-plaintext highlighter-rouge">qstat -u</code>
+Check the log file in logs to make sure everything ran ok. 
+This should run relatively quickly (only a few minutes)</p>
+
+  <p>Once the averages are done, you can submit the diagnostics script:</p>
+
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>qsub atm_diagnostics <span class="nt">-A</span> UGMU0032
+</code></pre></div>  </div>
+
+  <p>This will also run relatively quickly (few minutes).<br />
+Once it is done, you can go to the location of the diagnostics and look at the output via a webpage:</p>
+
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> /glade/scratch/kpegion/diagnostics-output/atm/diag/test2-obs.1-3
+firefox index.html &amp;
+</code></pre></div>  </div>
+
+  <p>It may be slow for your web browser window to launch and display
+depending on your bandwidth.</p>
+
+  <p>For more information on the Atmosphere (AMWG) Diagnostics Package: http://www.cesm.ucar.edu/working_groups/Atmosphere/amwg-diagnostics-package/</p>
 
 </blockquote>
 
-<h4 id="what-did-we-just-do">What did we just do?</h4>
+<blockquote class="callout">
+  <h2 id="land-diagnostics-package">Land Diagnostics Package</h2>
 
-<p><code class="language-plaintext highlighter-rouge">create_newcase</code> takes 3 arguments</p>
+  <p>Edit the settings for the <code class="language-plaintext highlighter-rouge">env_diags_land.xml</code> file using <code class="language-plaintext highlighter-rouge">pp_config</code></p>
 
-<p><img src="../fig/createnewcase.png" alt="create_newcase" /></p>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./pp_config <span class="nt">--set</span> <span class="nv">LNDDIAG_OUTPUT_ROOT_PATH</span><span class="o">=</span>/glade/scratch/kpegion/diagnostics-output/lnd
+./pp_config <span class="nt">--set</span> <span class="nv">LNDDIAG_clim_first_yr_1</span><span class="o">=</span>1
+./pp_config <span class="nt">--set</span> <span class="nv">LNDDIAG_clim_num_yrs_1</span><span class="o">=</span>3
+./pp_config <span class="nt">--set</span> <span class="nv">LNDDIAG_trends_first_yr_1</span><span class="o">=</span>1
+./pp_config <span class="nt">--set</span> <span class="nv">LNDDIAG_trends_num_yrs_1</span><span class="o">=</span>3
+</code></pre></div>  </div>
 
-<h4 id="case-name-case">Case Name (<code class="language-plaintext highlighter-rouge">case</code>)</h4>
-<p>This is the name and location of your experiment</p>
-<ul>
-  <li>Can be anything you want</li>
-  <li>It is a good idea to make it descriptive so you can distinguish different cases</li>
-  <li>NCAR has reccomended naming conventions</li>
-</ul>
+  <p>Run the monthly climatologies</p>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>qsub lnd_averages <span class="nt">-A</span> UGMU0032
+</code></pre></div>  </div>
 
-<p>This experiment is called <code class="language-plaintext highlighter-rouge">b.day1.0</code> and it is located in my cases directory in my home directory.</p>
+  <p>You can monitor your job status using <code class="language-plaintext highlighter-rouge">qstat -u</code>
+Check the log file in logs to make sure everything ran ok. 
+This should run relatively quickly (only a few minutes)</p>
 
-<h4 id="resoultion-res">Resoultion (<code class="language-plaintext highlighter-rouge">res</code>)</h4>
-<p>Specifies the resolution and grid of the model components.
-Each model resolution can be specified by its alias or long name.</p>
+  <p>Once the averages are done, you can submit the diagnostics script:</p>
 
-<p><img src="../fig/grid.png" alt="grid" /></p>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>qsub lnd_diagnostics <span class="nt">-A</span> UGMU0032
+</code></pre></div>  </div>
 
-<p>How to know what grids are available?
-There’s a tool</p>
+  <p>This will also run relatively quickly (few minutes).
+Once it is done, you can go to the location of the diagnostics and look at the output via a webpage:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>CIMEROOT/scripts/query_config <span class="nt">--grids</span> <span class="nt">--long</span> 
-</code></pre></div></div>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> /glade/scratch/kpegion/diagnostics-output/lnd/diag/test2-obs.1_3
+firefox setsIndex.html &amp;
+</code></pre></div>  </div>
 
-<p>and a <a href="http://www.cesm.ucar.edu/models/cesm2/config/grids.html">website</a></p>
+  <p>It may be slow for your web browser window to launch and display
+depending on your bandwidth.</p>
 
-<blockquote class="challenge">
-  <h2 id="understanding-grids">Understanding grids</h2>
-
-  <p>The resolution f09_g17 is the standard resolution used for CMIP simulations 
-with the CESM. What is the resolution of the atmosphere/land and ocean in this model?</p>
+  <p>For more information the Land (LMWG) Diagnostics Package: http://www.cesm.ucar.edu/models/cesm1.2/clm/clm_diagpackage.html</p>
 
 </blockquote>
 
-<h4 id="component-set-compset">Component Set (<code class="language-plaintext highlighter-rouge">compset</code>)</h4>
+<blockquote class="callout">
+  <h2 id="ocean-diagnostics-package">Ocean Diagnostics Package</h2>
 
-<p>Sets which versions and component models are active vs. inactive and what forcings are used.<br />
-The first letter <code class="language-plaintext highlighter-rouge">B</code> in this compset indicate that all components are active.  The <code class="language-plaintext highlighter-rouge">1850</code> means that the 1850 greenhouse gas forcings will be used.</p>
+  <p>Edit the settings for the <code class="language-plaintext highlighter-rouge">env_diags_ocn.xml</code> file using <code class="language-plaintext highlighter-rouge">pp_config</code></p>
 
-<p>How do I know what the different compsets are?</p>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./pp_config <span class="nt">--set</span> <span class="nv">OCNDIAG_YEAR0</span><span class="o">=</span>1
+./pp_config <span class="nt">--set</span> <span class="nv">OCNDIAG_YEAR1</span><span class="o">=</span>3
+./pp_config <span class="nt">--set</span> <span class="nv">OCNDIAG_TSERIES_YEAR0</span><span class="o">=</span>1
+./pp_config <span class="nt">--set</span> <span class="nv">OCNDIAG_TSERIES_YEAR1</span><span class="o">=</span>3
+./pp_config <span class="nt">--set</span> <span class="nv">OCNDIAG_TAVGDIR</span><span class="o">=</span>/glade/scratch/kpegion/diagnostics-output/ocn/climo/tavg.<span class="se">\$</span>OCNDIAG_YEAR0.<span class="se">\$</span>OCNDIAG_YEAR1
+./pp_config <span class="nt">--set</span> <span class="nv">OCNDIAG_WORKDIR</span><span class="o">=</span>/glade/scratch/kpegion/diagnostics-output/ocn/diag/test2.<span class="se">\$</span>OCNDIAG_YEAR0.<span class="se">\$</span>OCNDIAG_YEAR1
+</code></pre></div>  </div>
 
-<p>There’s a tool</p>
+  <p>Run the monthly climatologies</p>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>qsub ocn_averages <span class="nt">-A</span> UGMU0032
+</code></pre></div>  </div>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>CIMEROOT/scripts/query_config <span class="nt">--compsets</span>
+  <p>You can monitor your job status using <code class="language-plaintext highlighter-rouge">qstat -u</code>
+Check the log file in logs to make sure everything ran ok.
+This should run relatively quickly (only a few minutes)</p>
+
+  <p>Once the averages are done, you can submit the diagnostics script:</p>
+
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>qsub ocn_diagnostics <span class="nt">-A</span> UGMU0032
+</code></pre></div>  </div>
+
+  <p>This will also run relatively quickly (few minutes).
+Once it is done, you can go to the location of the diagnostics and look at the output via a webpage:</p>
+
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> /glade/scratch/kpegion/diagnostics-output/ocn/diag/test2.1_3
+firefox index.html &amp;
+</code></pre></div>  </div>
+
+  <p>It may be slow for your web browser window to launch and display
+depending on your bandwidth.</p>
+
+</blockquote>
+
+<blockquote class="callout">
+  <h2 id="ice-diagnostics-package">Ice Diagnostics Package</h2>
+
+  <p>Edit the settings for the <code class="language-plaintext highlighter-rouge">env_diags_ic.xml</code> file using <code class="language-plaintext highlighter-rouge">pp_config</code></p>
+
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./pp_config <span class="nt">--set</span> <span class="nv">ICEDIAG_BEGYR_CONT</span><span class="o">=</span>1
+./pp_config <span class="nt">--set</span> <span class="nv">ICEDIAG_ENDYR_CONT</span><span class="o">=</span>3
+./pp_config <span class="nt">--set</span> <span class="nv">ICEDIAG_YRS_TO_AVG</span><span class="o">=</span>3
+./pp_config <span class="nt">--set</span> <span class="nv">ICEDIAG_PATH_CLIMO_CONT</span><span class="o">=</span>/glade/scratch/kpegion/diagnostics-output/ice/climo/<span class="se">\$</span>ICEDIAG_CASE_TO_CONT/
+./pp_config <span class="nt">--set</span> <span class="nv">ICEDIAG_DIAG_ROOT</span><span class="o">=</span>/glade/scratch/kpegion/diagnostics-output/ice/diag/<span class="se">\$</span>ICEDIAG_CASE_TO_CONT/
+</code></pre></div>  </div>
+
+  <p>Run the monthly climatologies</p>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>qsub ice_averages <span class="nt">-A</span> UGMU0032
+</code></pre></div>  </div>
+
+  <p>You can monitor your job status using <code class="language-plaintext highlighter-rouge">qstat -u</code>
+Check the log file in logs to make sure everything ran ok.
+This should run relatively quickly (only a few minutes)</p>
+
+  <p>Once the averages are done, you can submit the diagnostics script:</p>
+
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>qsub ice_diagnostics <span class="nt">-A</span> UGMU0032
+</code></pre></div>  </div>
+
+  <p>This will also run relatively quickly (few minutes).
+Once it is done, you can go to the location of the diagnostics and look at the output via a webpage:</p>
+
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> /glade/scratch/kpegion/diagnostics-output/ice/diag/test2.1_3
+firefox index.html &amp;
+</code></pre></div>  </div>
+
+  <p>It may be slow for your web browser window to launch and display
+depending on your bandwidth.</p>
+
+</blockquote>
+
+<h3 id="try-the-cvdp">Try the CVDP</h3>
+
+<p>Our runs are not long enough to run the CVDP, but you can test it on an existing long simulation, the CESM Large Ensemble.</p>
+
+<h4 id="on-cheyenne-we-need-to-get-an-analysis-node-to-casper">On Cheyenne, we need to get an analysis node to Casper</h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>execdav <span class="nt">--account</span><span class="o">=</span>UGMU0032
+<span class="nb">cd</span> ~/scripts/CVDP
 </code></pre></div></div>
 
-<p>and a <a href="http://www.cesm.ucar.edu/models/cesm2/config/compsets.html">website</a></p>
+<h4 id="open-the-file-namelist-using-your-preferred-text-editor">Open the file <code class="language-plaintext highlighter-rouge">namelist</code> using your preferred text editor</h4>
 
-<p>Some Common Compset Starting Characters</p>
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">B</code> all components are active</li>
-  <li><code class="language-plaintext highlighter-rouge">F</code> atmosphere is active; ocean and ice are inactive</li>
-  <li><code class="language-plaintext highlighter-rouge">I</code> land is active</li>
-  <li><code class="language-plaintext highlighter-rouge">G</code> ocean is active</li>
-  <li><code class="language-plaintext highlighter-rouge">A</code> aquaplaned (atm with no land)</li>
-</ul>
+<p>The format of the file is:
+<code class="language-plaintext highlighter-rouge">Run Name | Path to all data for a simulatoin | Analysis start year | Analysis end year</code></p>
 
-<p>Certain compsets are <code class="language-plaintext highlighter-rouge">scientifically validated</code> meaning they have been extensively tested.<br />
-You can create your own compsets.
-It is strongly suggested that you start developing any experiments from a scientifically validated compset, then make changes.
-The selected compset determines which grids are available.</p>
+<h4 id="modify-the-rows-so-that-the-analysis-start-and-end-years-are-1979-and-2015">Modify the rows so that the analysis start and end years are 1979 and 2015.</h4>
 
-<h3 id="the-caseroot-directory">The <code class="language-plaintext highlighter-rouge">CASEROOT</code> directory</h3>
+<p>Open up the file <code class="language-plaintext highlighter-rouge">driver.ncl</code> using your preferred text editor</p>
 
-<p>This was created when you ran <code class="language-plaintext highlighter-rouge">create_newcase</code>. Change directory and take a look at it:</p>
+<p><em>On line 7: replace <code class="language-plaintext highlighter-rouge">user</code> with your username</em>
+<em>On line 19: change <code class="language-plaintext highlighter-rouge">False</code> to  <code class="language-plaintext highlighter-rouge">True</code> to output calculations in nceCDF</em></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cd ~/b.day1.0
-$ ls
-</code></pre></div></div>
-<p>It contains a bunch of <code class="language-plaintext highlighter-rouge">.xml</code> files which are configuration files.  We will learn how to modify them next week.</p>
+<h4 id="run-the-cvdp-by-typing">Run the CVDP by typing</h4>
 
-<h4 id="what-happened-when-we-ran-casesetup">What happened when we ran <code class="language-plaintext highlighter-rouge">case.setup</code>?</h4>
-<ul>
-  <li>Your RUNDIR and EXEROOT directories were created</li>
-  <li>A bunch of user.nl.xxx files were created (these are namelist files that provide configuraiton details to different component models)</li>
-  <li>Created the <code class="language-plaintext highlighter-rouge">case.run</code> and <code class="language-plaintext highlighter-rouge">case.st_archive</code> scripts</li>
-  <li>Create a CaseDocs directory</li>
-</ul>
-
-<h3 id="what-happened-when-we-ran-casebuild">What happened when we ran <code class="language-plaintext highlighter-rouge">case.build</code>?</h3>
-<ul>
-  <li>Checked that all the input data was available</li>
-  <li>Created the namelists from the user specified ones above</li>
-  <li>Compiled the model</li>
-</ul>
-
-<h3 id="how-can-i-find-out-what-my-caseroot-cimeroot-etc-are-if-i-forget">How can I find out what my CASEROOT, CIMEROOT, etc. are if I forget?</h3>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>./xmlquery RUNDIR,EXEROOT,CASEROOT,CIMEROOT
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ncl driver.ncl
 </code></pre></div></div>
 
-<h3 id="now-what">Now what?</h3>
+<p>It will take ~20 minutes.  Once it is complete, go to the output directory and open a firefox window</p>
 
-<p>If your build has completed, then you can submit your model run to the queue.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>./case.submit
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> /glade/scatch/kpegion/CVDP
+firefox index.html&amp;
 </code></pre></div></div>
 
-<p>You can see that is is in the queue, using</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>qstat <span class="nt">-u</span> username
+<blockquote class="keypoints">
+  <h2>Key Points</h2>
+  <ul>
+    
+  </ul>
+</blockquote>
+
+<hr />
+
+<h1 id="postprocessing" class="maintitle">Postprocessing</h1>
+
+<blockquote class="objectives">
+  <h2>Overview</h2>
+
+  <div class="row">
+    <div class="col-md-3">
+      <strong>Teaching:</strong> 0 min
+      <br />
+      <strong>Exercises:</strong> 0 min
+    </div>
+    <div class="col-md-9">
+      <strong>Questions</strong>
+      <ul>
+	
+	<li><p>What are some common run time configuration changes?</p>
+</li>
+	
+	<li><p>How do I make these changess?</p>
+</li>
+	
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-9">
+      <strong>Objectives</strong>
+      <ul>
+	
+      </ul>
+    </div>
+  </div>
+
+</blockquote>
+
+<p>The process of going from <code class="language-plaintext highlighter-rouge">history</code> files to <code class="language-plaintext highlighter-rouge">timeseries</code> files and to convert 3D atmospheric data from the model coordinate system to selected pressure levels. We will learn how to use the CESM Postprocessing Tools</p>
+
+<p>The post processing scripts are located in your ~/scripts/ directory.
+You can find them using ls <em>create</em>.</p>
+
+<h4 id="open-the-script-in-a-text-editor-eg-gedit-vi-emacs">Open the script in a text editor (e.g. gedit, vi, emacs)</h4>
+
+<h4 id="change-the-lines-of-the-script-relevant-for-your-run-for-example-in-atmcreate_timeseriesncl">Change the lines of the script relevant for your run, for example, in `atm.create_timeseries.ncl’</h4>
+
+<p>run_name = “test1”
+  styr = 1
+  enyr = 4
+  work_dir = “/glade/scratch/kpegion/”
+  archive_dir = “/glade/scratch/kpegion/archive/”+run_name+”/atm/hist”</p>
+
+<h4 id="run-the-postprocessing-script">Run the postprocessing script</h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ncl atm.create_timeseries.ncl
 </code></pre></div></div>
 
-<p>What do we see regarding the model run in the queue?</p>
+<h4 id="the-timeseries-files-are-located-in">The timeseries files are located in:</h4>
+<p><code class="language-plaintext highlighter-rouge">/glade/scratch/kpegion/processed/&lt;case name&gt;/</code></p>
 
-<p>You can logout now.  While we are away, our model will run.  We will return next week to take a look!</p>
+<p>You can take a quick look at them in <code class="language-plaintext highlighter-rouge">ncview</code>.
+To do Assignment #2, you can read them in using <code class="language-plaintext highlighter-rouge">xarray</code></p>
+
+<p>Run the post-processing for whichever component is of interest to you.</p>
 
 <blockquote class="keypoints">
   <h2>Key Points</h2>
