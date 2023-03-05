@@ -11,7 +11,7 @@ keypoints:
 We have three cases (or experiments) we are working with.  We will take a look at what happened with each one of them. 
 
 1. b.day1.0 
-: This was our first case that ran initially for 5-days.  We then set `CONTINUE_RUN=TRUE` and ran it again for another 5-days.
+: This was our first case that ran initially for 5-days.  Let's set `CONTINUE_RUN=TRUE` and ran it again for another 5-days.
 This run should have completed successfully. How can we confirm this?
 
 > ## Check your CaseStatus file
@@ -31,14 +31,14 @@ cases/b.day1.0> ./xmlquery DOUT_S_ROOT
 
 ~~~
 
-	DOUT_S_ROOT: /glade/scratch/kpegion/archive/b.day1.0
+	DOUT_S_ROOT: /glade/scratch/cstan/archive/b.day1.0
 ~~~
 {: .output}
 
 We will go there and see if we now have 10 days of data.
 
 ~~~
-cd /glade/scratch/kpegion/archive/b.day1.0
+cd /glade/scratch/kpegion/cstan/b.day1.0
 cd ocn/hist
 ~~~
 {: .language-bash}
@@ -50,7 +50,7 @@ We now have two output files for the ocean: `b.day1.0.pop.h.nday1.0001-01-01.nc`
 Use ncview to look at these files.
 
 2. Second case
-: This is our case that we are running for 4-years with daily precip and standard monthly output to use for Assignment #2. Assuming the configuration and namelist changes were entered correctly, this run should have completed successfully. 
+: This is our case that we are running for 4-years with daily precip and standard monthly output to use for Assignment #3. Assuming the configuration and namelist changes were entered correctly, this run should have completed successfully. 
 
 * Check your `CaseStatus` file.
 * If errors, check your log file
@@ -58,7 +58,7 @@ Use ncview to look at these files.
 
 There should be monthly and daily output for the atmosphere. Let's confirm:
 ~~~
-cd /glade/scratch/kpegion/archive/test1/atm/hist
+cd /glade/scratch/cstab/archive/run.2/atm/hist
 ls
 ~~~
 {: .language-bash}
@@ -110,7 +110,7 @@ cases/branchwrong> head -n1 README.case
 {: .language-bash}
 
 ~~~
-2020-09-28 09:07:01: ./create_newcase --case /glade/u/home/kpegion/cases/branchwrong --res f19_g17 --compset B1850 --project UGMU0035
+2020-09-28 09:07:01: ./create_newcase --case /glade/u/home/cstan/cases/branchwrong --res f19_g17 --compset B1850 --project UGMU0042
 ~~~
 {: .output}
 
@@ -180,7 +180,7 @@ Project, Status, Active
 P05010048, Normal, True
 P93300190, Overspent, True
 UGMU0032, Normal, True
-P93300042, Overspent, True' from dir '/glade/u/home/kpegion/cases/branchwrong'
+P93300042, Overspent, True' from dir '/glade/u/home/cstan/cases/branchwrong'
  ---------------------------------------------------
 2020-09-28 09:39:35: xmlchange success <command> ./xmlchange PROJECT=UGMU0032  </command>
  ---------------------------------------------------
@@ -206,7 +206,7 @@ See log file for details: /glade/scratch/kpegion/branchwrong/run/cesm.log.435582
 Another thing we did that is not documented automatically is to copy the restart files from our `b.day1.0` case to our new run directory. This was so the model has a set of restart files to start the run from.
 
 ~~~
-cp /glade/scratch/kpegion/archive/b.day1.0/rest/0001-01-06-00000/* /glade/scratch/kpegion/test1/run/ 
+cp /glade/scratch/cstan/archive/b.day1.0/rest/0001-01-06-00000/* /glade/scratch/cstan/test1/run/ 
 ~~~
 {: .language-bash}
 
