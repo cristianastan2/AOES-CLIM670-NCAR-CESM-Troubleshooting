@@ -58,7 +58,7 @@ Select and run a diagnostics package of interest to you:
 > Once it is done, you can go to the location of the diagnostics and look at the output via a webpage:
 >
 > ~~~
-> cd /glade/scratch/cstan/diagnostics-output/atm/diag/run.2-obs.1-3
+> cd glade/scratch/cstan/diagnostics-output/atm/diag/run.2-obs.1_3
 > firefox index.html &
 > ~~~
 > {: .language-bash}
@@ -106,7 +106,7 @@ Select and run a diagnostics package of interest to you:
 > Once it is done, you can go to the location of the diagnostics and look at the output via a webpage:
 >
 > ~~~
-> cd /glade/scratch/cstan/diagnostics-output/lnd/diag/test2-obs.1_3
+> cd /glade/scratch/cstan/diagnostics-output/lnd/diag/run.2-obs.1_3
 > firefox setsIndex.html &
 > ~~~
 > {: .language-bash}
