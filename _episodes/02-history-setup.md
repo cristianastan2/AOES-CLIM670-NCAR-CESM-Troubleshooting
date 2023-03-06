@@ -13,7 +13,7 @@ We will now return to the output from our 4-year case.  Let's go to the atmosphe
 If your 4-year case did not run to completion, you are welcome to look at mine.
 
 ~~~
-cd /glade/scratch/kpegion/archive/test1/atm/hist
+cd /glade/scratch/cstan/archive/run.2/atm/hist
 ~~~
 {: .language-bash}
 
@@ -75,11 +75,11 @@ We will setup everything necessary for you to be able to run the postprocessing 
 If you have never setup a `.profile` or `.tcshrc` on cheyenne:
 
 ~~~
-cp /glade/u/home/kpegion/clim670/profile.sample ~/.profile
+cp /glade/u/home/cstan/.profile ~/.profile
 ~~~
 {: .language-bash}
 
-If you already have a `.profile` (bash users) or a `.tcshrc` (tcsh users), look at the corresponding file and add the necessary items from the sample file to your file.  The sample files are located in: `~kpegion/clim670/`
+If you already have a `.profile` (bash users) or a `.tcshrc` (tcsh users), look at the corresponding file and add the necessary items from the .profile file to your file.  The .prfile file is located in: `~cstan/`
 
 #### Copy the post-processing scripts to the correct location:
 
@@ -124,28 +124,28 @@ cesm_pp_activate
 #### Create a directory for the CESM postprocessing code:
 
 ~~~
-mkdir /glade/scratch/kpegion/cesm-postprocess
+mkdir /glade/scratch/cstan/cesm-postprocess
 ~~~
 {: .language-bash}
 
 #### Run the postprocessing using `create_postprocess` and tell it the name of your 4-year case
 
 ~~~
-create_postprocess --caseroot /glade/scratch/kpegion/cesm-postprocess/test1
+create_postprocess --caseroot /glade/scratch/cstan/cesm-postprocess/run.2
 ~~~
 {: .language-bash}
 
 #### Go to the postprocessing directory:
 
 ~~~
-cd /glade/scratch/kpegion/cesm-postprocess/test1
+cd /glade/scratch/cstan/cesm-postprocess/run.2
 ~~~
 {: .language-bash}
 
 #### Set the location of the model data:
 
 ~~~
-./pp_config --set DOUT_S_ROOT=/glade/scratch/kpegion/archive/test1
+./pp_config --set DOUT_S_ROOT=/glade/scratch/cstan/archive/run.2
 ~~~
 {: .language-bash}
 
