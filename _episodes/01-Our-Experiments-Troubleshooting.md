@@ -38,7 +38,7 @@ cases/b.day1.0> ./xmlquery DOUT_S_ROOT
 We will go there and see if we now have 10 days of data.
 
 ~~~
-cd /glade/scratch/kpegion/cstan/b.day1.0
+cd /glade/scratch/cstan/b.day1.0
 cd ocn/hist
 ~~~
 {: .language-bash}
@@ -58,7 +58,7 @@ Use ncview to look at these files.
 
 There should be monthly and daily output for the atmosphere. Let's confirm:
 ~~~
-cd /glade/scratch/cstab/archive/run.2/atm/hist
+cd /glade/scratch/cstan/archive/run.2/atm/hist
 ls
 ~~~
 {: .language-bash}
