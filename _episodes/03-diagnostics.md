@@ -39,7 +39,7 @@ Select and run a diagnostics package of interest to you:
 > 
 > Run the monthly climatologies
 > ~~~
-> qsub atm_averages -A UGMU0041
+> qsub -A UGMU0041 atm_averages
 > ~~~
 > {: .language-bash}
 >
@@ -50,7 +50,7 @@ Select and run a diagnostics package of interest to you:
 > Once the averages are done, you can submit the diagnostics script:
 >
 > ~~~
-> qsub atm_diagnostics -A UGMU0041
+> qsub -A UGMU0041 atm_diagnostics
 > ~~~
 > {: .language-bash}
 >
@@ -58,7 +58,7 @@ Select and run a diagnostics package of interest to you:
 > Once it is done, you can go to the location of the diagnostics and look at the output via a webpage:
 >
 > ~~~
-> cd /glade/scratch/cstan/diagnostics-output/atm/diag/test2-obs.1-3
+> cd /glade/scratch/cstan/diagnostics-output/atm/diag/run.2-obs.1-3
 > firefox index.html &
 > ~~~
 > {: .language-bash}
@@ -87,7 +87,7 @@ Select and run a diagnostics package of interest to you:
 >
 > Run the monthly climatologies
 > ~~~
-> qsub lnd_averages -A UGMU0041
+> qsub -A UGMU0041 lnd_averages
 > ~~~
 > {: .language-bash}
 >
@@ -98,7 +98,7 @@ Select and run a diagnostics package of interest to you:
 > Once the averages are done, you can submit the diagnostics script:
 >
 > ~~~
-> qsub lnd_diagnostics -A UGMU0041
+> qsub -A UGMU0041 lnd_diagnostics
 > ~~~
 > {: .language-bash}
 >
@@ -128,14 +128,14 @@ Select and run a diagnostics package of interest to you:
 > ./pp_config --set OCNDIAG_TSERIES_YEAR0=1
 > ./pp_config --set OCNDIAG_TSERIES_YEAR1=3
 > ./pp_config --set OCNDIAG_TAVGDIR=/glade/scratch/cstan/diagnostics-output/ocn/climo/tavg.\$OCNDIAG_YEAR0.\$OCNDIAG_YEAR1
-> ./pp_config --set OCNDIAG_WORKDIR=/glade/scratch/cstan/diagnostics-output/ocn/diag/test2.\$OCNDIAG_YEAR0.\$OCNDIAG_YEAR1
+> ./pp_config --set OCNDIAG_WORKDIR=/glade/scratch/cstan/diagnostics-output/ocn/diag/run.2.\$OCNDIAG_YEAR0.\$OCNDIAG_YEAR1
 > ~~~
 > {: .language-bash}
 >
 >
 > Run the monthly climatologies
 > ~~~
-> qsub ocn_averages -A UGMU0041
+> qsub -A UGMU0041 ocn_averages
 > ~~~
 > {: .language-bash}
 >
@@ -146,7 +146,7 @@ Select and run a diagnostics package of interest to you:
 > Once the averages are done, you can submit the diagnostics script:
 >
 > ~~~
-> qsub ocn_diagnostics -A UGMU0041
+> qsub -A UGMU0041 ocn_diagnostics
 > ~~~
 > {: .language-bash}
 >
@@ -154,7 +154,7 @@ Select and run a diagnostics package of interest to you:
 > Once it is done, you can go to the location of the diagnostics and look at the output via a webpage:
 >
 > ~~~
-> cd /glade/scratch/cstan/diagnostics-output/ocn/diag/test2.1_3
+> cd /glade/scratch/cstan/diagnostics-output/ocn/diag/run.2.1_3
 > firefox index.html &
 > ~~~
 > {: .language-bash}
@@ -180,7 +180,7 @@ Select and run a diagnostics package of interest to you:
 >
 > Run the monthly climatologies
 > ~~~
-> qsub ice_averages -A UGMU0041
+> qsub -A UGMU0041 ice_averages
 > ~~~
 > {: .language-bash}
 >
@@ -191,7 +191,7 @@ Select and run a diagnostics package of interest to you:
 > Once the averages are done, you can submit the diagnostics script:
 >
 > ~~~
-> qsub ice_diagnostics -A UGMU0041
+> qsub -A UGMU0041 ice_diagnostics
 > ~~~
 > {: .language-bash}
 >
@@ -199,7 +199,7 @@ Select and run a diagnostics package of interest to you:
 > Once it is done, you can go to the location of the diagnostics and look at the output via a webpage:
 >
 > ~~~
-> cd /glade/scratch/cstan/diagnostics-output/ice/diag/test2.1_3
+> cd /glade/scratch/cstan/diagnostics-output/ice/diag/run.2.1_3
 > firefox index.html &
 > ~~~
 > {: .language-bash}
