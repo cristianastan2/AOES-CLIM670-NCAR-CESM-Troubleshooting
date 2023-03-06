@@ -300,6 +300,7 @@ more quickly if we tell it we need less time.
 > >
 > > ~~~
 > > RUN_REFDATE=0001-01-06
+> > ./xmlchange RUN_REFDATE='0001-01-06'
 > > ~~~
 > > {: .language-bash}
 > >
