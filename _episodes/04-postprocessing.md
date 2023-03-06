@@ -19,11 +19,11 @@ You can find them using ls *create*.
 
 #### Change the lines of the script relevant for your run, for example, in `atm.create_timeseries.ncl'
 
-  run_name = "test1"
+  run_name = "run.2"
   styr = 1
   enyr = 4
-  work_dir = "/glade/scratch/kpegion/"
-  archive_dir = "/glade/scratch/kpegion/archive/"+run_name+"/atm/hist"
+  work_dir = "/glade/scratch/cstan/"
+  archive_dir = "/glade/scratch/cstan/archive/"+run_name+"/atm/hist"
 
 #### Run the postprocessing script
 
@@ -33,10 +33,10 @@ ncl atm.create_timeseries.ncl
 {: .language-bash}
 
 #### The timeseries files are located in:
-`/glade/scratch/kpegion/processed/<case name>/`
+`/glade/scratch/cstan/processed/<case name>/`
 
 You can take a quick look at them in `ncview`.
-To do Assignment #2, you can read them in using `xarray` 
+To do Assignment #3, you can read them in using `xarray` 
 
 Run the post-processing for whichever component is of interest to you.
 
