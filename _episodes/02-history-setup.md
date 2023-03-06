@@ -42,7 +42,7 @@ A timeseries file: `f40_test.cam.h0.PSL.199001-199912.nc`
 
 The time coordinate variable in CESM history and timeseries files represents *the end* of the averaging period for variables that are averages.  The time that gets resolved when the data are read in does not match the date in the filename. For monthly averaged data, the filename is correct.  This can be a source of much confusion.
 
-Example: `test1.cam.h0.0001-05.nc`
+Example: `run.2.cam.h0.0001-05.nc`
 * This is a history file for may of year one of our run.
 * When you read in this file, the first time is resolved as: `0001-06-01`.  This means that Jun 1 of year 0001 is the end of the averaging period and the data contains the average for May of year 1.
 * To verify the averaging period in the files, consult the `time_bnds`, `time_bound`, or `time_bounds` variable. Always check!!!!
