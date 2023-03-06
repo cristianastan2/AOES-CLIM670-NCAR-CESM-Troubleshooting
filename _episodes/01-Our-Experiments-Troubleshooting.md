@@ -206,7 +206,7 @@ See log file for details: /glade/scratch/kpegion/branchwrong/run/cesm.log.435582
 Another thing we did that is not documented automatically is to copy the restart files from our `b.day1.0` case to our new run directory. This was so the model has a set of restart files to start the run from.
 
 ~~~
-cp /glade/scratch/cstan/archive/b.day1.0/rest/0001-01-06-00000/* /glade/scratch/cstan/test1/run/ 
+cp /glade/scratch/cstan/archive/b.day1.0/rest/0001-01-06-00000/* /glade/scratch/cstan/branchwrong/run/ 
 ~~~
 {: .language-bash}
 
@@ -215,7 +215,7 @@ cp /glade/scratch/cstan/archive/b.day1.0/rest/0001-01-06-00000/* /glade/scratch/
 Look at your log file and use `grep -i` to find errors.
 
 ~~~
-cases/branchwrong> grep -i error /glade/scratch/kpegion/branchwrong/run/cesm.log.4355823.chadmin1.ib0.cheyenne.ucar.edu.200928-110158
+cases/branchwrong> grep -i error /glade/scratch/cstan/branchwrong/run/cesm.log.4355823.chadmin1.ib0.cheyenne.ucar.edu.200928-110158
 ~~~
 {: .language-bash}
 
