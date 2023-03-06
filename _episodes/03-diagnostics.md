@@ -30,7 +30,7 @@ Select and run a diagnostics package of interest to you:
 > Edit the settings for the `env_diags_atm.xml` file using `pp_config`
 > 
 > ~~~
-> ./pp_config --set ATMDIAG_OUTPUT_ROOT_PATH=/glade/scratch/kpegion/diagnostics-output/atm
+> ./pp_config --set ATMDIAG_OUTPUT_ROOT_PATH=/glade/scratch/cstan/diagnostics-output/atm
 > ./pp_config --set ATMDIAG_test_first_yr=1
 > ./pp_config --set ATMDIAG_test_nyrs=3
 > ~~~
@@ -39,7 +39,7 @@ Select and run a diagnostics package of interest to you:
 > 
 > Run the monthly climatologies
 > ~~~
-> qsub atm_averages -A UGMU0032
+> qsub atm_averages -A UGMU0041
 > ~~~
 > {: .language-bash}
 >
@@ -50,7 +50,7 @@ Select and run a diagnostics package of interest to you:
 > Once the averages are done, you can submit the diagnostics script:
 >
 > ~~~
-> qsub atm_diagnostics -A UGMU0032
+> qsub atm_diagnostics -A UGMU0041
 > ~~~
 > {: .language-bash}
 >
@@ -58,7 +58,7 @@ Select and run a diagnostics package of interest to you:
 > Once it is done, you can go to the location of the diagnostics and look at the output via a webpage:
 >
 > ~~~
-> cd /glade/scratch/kpegion/diagnostics-output/atm/diag/test2-obs.1-3
+> cd /glade/scratch/cstan/diagnostics-output/atm/diag/test2-obs.1-3
 > firefox index.html &
 > ~~~
 > {: .language-bash}
@@ -76,7 +76,7 @@ Select and run a diagnostics package of interest to you:
 > Edit the settings for the `env_diags_land.xml` file using `pp_config`
 >
 > ~~~
-> ./pp_config --set LNDDIAG_OUTPUT_ROOT_PATH=/glade/scratch/kpegion/diagnostics-output/lnd
+> ./pp_config --set LNDDIAG_OUTPUT_ROOT_PATH=/glade/scratch/cstan/diagnostics-output/lnd
 > ./pp_config --set LNDDIAG_clim_first_yr_1=1
 > ./pp_config --set LNDDIAG_clim_num_yrs_1=3
 > ./pp_config --set LNDDIAG_trends_first_yr_1=1
@@ -87,7 +87,7 @@ Select and run a diagnostics package of interest to you:
 >
 > Run the monthly climatologies
 > ~~~
-> qsub lnd_averages -A UGMU0032
+> qsub lnd_averages -A UGMU0041
 > ~~~
 > {: .language-bash}
 >
@@ -98,7 +98,7 @@ Select and run a diagnostics package of interest to you:
 > Once the averages are done, you can submit the diagnostics script:
 >
 > ~~~
-> qsub lnd_diagnostics -A UGMU0032
+> qsub lnd_diagnostics -A UGMU0041
 > ~~~
 > {: .language-bash}
 >
@@ -106,7 +106,7 @@ Select and run a diagnostics package of interest to you:
 > Once it is done, you can go to the location of the diagnostics and look at the output via a webpage:
 >
 > ~~~
-> cd /glade/scratch/kpegion/diagnostics-output/lnd/diag/test2-obs.1_3
+> cd /glade/scratch/cstan/diagnostics-output/lnd/diag/test2-obs.1_3
 > firefox setsIndex.html &
 > ~~~
 > {: .language-bash}
@@ -127,15 +127,15 @@ Select and run a diagnostics package of interest to you:
 > ./pp_config --set OCNDIAG_YEAR1=3
 > ./pp_config --set OCNDIAG_TSERIES_YEAR0=1
 > ./pp_config --set OCNDIAG_TSERIES_YEAR1=3
-> ./pp_config --set OCNDIAG_TAVGDIR=/glade/scratch/kpegion/diagnostics-output/ocn/climo/tavg.\$OCNDIAG_YEAR0.\$OCNDIAG_YEAR1
-> ./pp_config --set OCNDIAG_WORKDIR=/glade/scratch/kpegion/diagnostics-output/ocn/diag/test2.\$OCNDIAG_YEAR0.\$OCNDIAG_YEAR1
+> ./pp_config --set OCNDIAG_TAVGDIR=/glade/scratch/cstan/diagnostics-output/ocn/climo/tavg.\$OCNDIAG_YEAR0.\$OCNDIAG_YEAR1
+> ./pp_config --set OCNDIAG_WORKDIR=/glade/scratch/cstan/diagnostics-output/ocn/diag/test2.\$OCNDIAG_YEAR0.\$OCNDIAG_YEAR1
 > ~~~
 > {: .language-bash}
 >
 >
 > Run the monthly climatologies
 > ~~~
-> qsub ocn_averages -A UGMU0032
+> qsub ocn_averages -A UGMU0041
 > ~~~
 > {: .language-bash}
 >
@@ -146,7 +146,7 @@ Select and run a diagnostics package of interest to you:
 > Once the averages are done, you can submit the diagnostics script:
 >
 > ~~~
-> qsub ocn_diagnostics -A UGMU0032
+> qsub ocn_diagnostics -A UGMU0041
 > ~~~
 > {: .language-bash}
 >
@@ -154,7 +154,7 @@ Select and run a diagnostics package of interest to you:
 > Once it is done, you can go to the location of the diagnostics and look at the output via a webpage:
 >
 > ~~~
-> cd /glade/scratch/kpegion/diagnostics-output/ocn/diag/test2.1_3
+> cd /glade/scratch/cstan/diagnostics-output/ocn/diag/test2.1_3
 > firefox index.html &
 > ~~~
 > {: .language-bash}
@@ -172,15 +172,15 @@ Select and run a diagnostics package of interest to you:
 > ./pp_config --set ICEDIAG_BEGYR_CONT=1
 > ./pp_config --set ICEDIAG_ENDYR_CONT=3
 > ./pp_config --set ICEDIAG_YRS_TO_AVG=3
-> ./pp_config --set ICEDIAG_PATH_CLIMO_CONT=/glade/scratch/kpegion/diagnostics-output/ice/climo/\$ICEDIAG_CASE_TO_CONT/
-> ./pp_config --set ICEDIAG_DIAG_ROOT=/glade/scratch/kpegion/diagnostics-output/ice/diag/\$ICEDIAG_CASE_TO_CONT/
+> ./pp_config --set ICEDIAG_PATH_CLIMO_CONT=/glade/scratch/cstan/diagnostics-output/ice/climo/\$ICEDIAG_CASE_TO_CONT/
+> ./pp_config --set ICEDIAG_DIAG_ROOT=/glade/scratch/cstan/diagnostics-output/ice/diag/\$ICEDIAG_CASE_TO_CONT/
 > ~~~
 > {: .language-bash}
 >
 >
 > Run the monthly climatologies
 > ~~~
-> qsub ice_averages -A UGMU0032
+> qsub ice_averages -A UGMU0041
 > ~~~
 > {: .language-bash}
 >
@@ -191,7 +191,7 @@ Select and run a diagnostics package of interest to you:
 > Once the averages are done, you can submit the diagnostics script:
 >
 > ~~~
-> qsub ice_diagnostics -A UGMU0032
+> qsub ice_diagnostics -A UGMU0041
 > ~~~
 > {: .language-bash}
 >
@@ -199,7 +199,7 @@ Select and run a diagnostics package of interest to you:
 > Once it is done, you can go to the location of the diagnostics and look at the output via a webpage:
 >
 > ~~~
-> cd /glade/scratch/kpegion/diagnostics-output/ice/diag/test2.1_3
+> cd /glade/scratch/cstan/diagnostics-output/ice/diag/test2.1_3
 > firefox index.html &
 > ~~~
 > {: .language-bash}
@@ -217,7 +217,7 @@ Our runs are not long enough to run the CVDP, but you can test it on an existing
 #### On Cheyenne, we need to get an analysis node to Casper
 
 ~~~
-execdav --account=UGMU0032
+execdav --account=UGMU0041
 cd ~/scripts/CVDP
 ~~~
 {: .language-bash}
@@ -244,7 +244,7 @@ ncl driver.ncl
 It will take ~20 minutes.  Once it is complete, go to the output directory and open a firefox window
 
 ~~~
-cd /glade/scatch/kpegion/CVDP
+cd /glade/scatch/cstan/CVDP
 firefox index.html&
 ~~~
 {: .language-bash}
