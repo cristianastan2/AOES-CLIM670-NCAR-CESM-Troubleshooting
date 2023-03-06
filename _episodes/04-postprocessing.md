@@ -13,7 +13,7 @@ The process of going from `history` files to `timeseries` files and to convert 3
 
 
 The post processing scripts are located in your ~/scripts/ directory.
-You can find them using ls *create*.
+You can find them using ls \*create\*.
 
 #### Open the script in a text editor (e.g. gedit, vi, emacs)
 
