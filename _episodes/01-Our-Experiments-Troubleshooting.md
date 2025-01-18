@@ -31,14 +31,14 @@ cases/b.day1.0> ./xmlquery DOUT_S_ROOT
 
 ~~~
 
-	DOUT_S_ROOT: /glade/scratch/cstan/archive/b.day1.0
+	DOUT_S_ROOT: /glade/derecho/scratch/cstan/archive/b.day1.0
 ~~~
 {: .output}
 
 We will go there and see if we now have 10 days of data.
 
 ~~~
-cd /glade/scratch/cstan/b.day1.0
+cd /glade/derecho/scratch/cstan/b.day1.0
 cd ocn/hist
 ~~~
 {: .language-bash}
@@ -58,7 +58,7 @@ Use ncview to look at these files.
 
 There should be monthly and daily output for the atmosphere. Let's confirm:
 ~~~
-cd /glade/scratch/cstan/archive/run.2/atm/hist
+cd /glade/derecho/scratch/cstan/archive/run.2/atm/hist
 ls
 ~~~
 {: .language-bash}
@@ -135,7 +135,7 @@ cases/branchwrong> more CaseStatus
 2023-03-05 18:03:08: case.build starting
  ---------------------------------------------------
 2023-03-05 18:03:10: case.build error
-ERROR: Missing required pointer_file /glade/scratch/cstan/branchwrong/run/rpointer.ocn.restart ---has pop initial data been prestaged to /glade/scratch/cstan/branchwrong/run?
+ERROR: Missing required pointer_file /glade/derecho/scratch/cstan/branchwrong/run/rpointer.ocn.restart ---has pop initial data been prestaged to /glade/derecho/scratch/cstan/branchwrong/run?
  ---------------------------------------------------
 2023-03-05 18:08:31: case.build starting
  ---------------------------------------------------
@@ -204,8 +204,8 @@ UGMU0041, Normal, True' from dir '/glade/u/home/cstan/cases/branchwrong'
 2023-03-05 18:27:00: model execution success
  ---------------------------------------------------
 2023-03-05 18:27:00: case.run error
-ERROR: RUN FAIL: Command 'mpiexec_mpt -p "%g:"  -np 576  omplace -tm open64  /glade/scratch/cstan/branchwrong/bld/cesm.exe  >> cesm.log.$LID 2>&1 ' failed
-See log file for details: /glade/scratch/cstan/branchwrong/run/cesm.log.8818830.chadmin1.ib0.cheyenne.ucar.edu.230305-182650
+ERROR: RUN FAIL: Command 'mpiexec_mpt -p "%g:"  -np 576  omplace -tm open64  /glade/derecho/scratch/cstan/branchwrong/bld/cesm.exe  >> cesm.log.$LID 2>&1 ' failed
+See log file for details: /glade/derecho/scratch/cstan/branchwrong/run/cesm.log.8818830.chadmin1.ib0.cheyenne.ucar.edu.230305-182650
  ---------------------------------------------------
 ~~~
 {: .output}
@@ -214,7 +214,7 @@ See log file for details: /glade/scratch/cstan/branchwrong/run/cesm.log.8818830.
 Another thing we did that is not documented automatically is to copy the restart files from our `b.day1.0` case to our new run directory. This was so the model has a set of restart files to start the run from.
 
 ~~~
-cp /glade/scratch/cstan/archive/b.day1.0/rest/0001-01-06-00000/* /glade/scratch/cstan/branchwrong/run/ 
+cp /glade/derecho/scratch/cstan/archive/b.day1.0/rest/0001-01-06-00000/* /glade/scratch/cstan/branchwrong/run/ 
 ~~~
 {: .language-bash}
 
@@ -223,7 +223,7 @@ cp /glade/scratch/cstan/archive/b.day1.0/rest/0001-01-06-00000/* /glade/scratch/
 Look at your log file and use `grep -i` to find errors.
 
 ~~~
-cases/branchwrong> grep -i error /glade/scratch/cstan/branchwrong/run/cesm.log.8818830.chadmin1.ib0.cheyenne.ucar.edu.230305-182650
+cases/branchwrong> grep -i error /glade/derecho/scratch/cstan/branchwrong/run/cesm.log.8818830.chadmin1.ib0.cheyenne.ucar.edu.230305-182650
 ~~~
 {: .language-bash}
 
