@@ -51,7 +51,7 @@ Example: `run.2.cam.h0.0001-05.nc`
 
 ### Postprocessing 
 
-The process of going from `history` files to `timeseries` files and to convert 3D atmospheric data from the model coordinate system to selected pressure levels. We will learn how to use the CESM Postprocessing Tools which are primarily written in NCAR Command Language (NCL).  NCL is in the process of being converted to Python, but for now, we can use the preprepared NCL scripts without having to know too much NCL.
+The process of going from `history` files to `timeseries` files and to convert 3D atmospheric data from the model coordinate system to selected pressure levels. We will learn how to use the CESM Postprocessing Tools which are primarily written in NCAR Command Language (NCL) and PyNGL the Python version of NCL. We will use the preprepared NCL scripts without having to know too much NCL.
 
 
 ### Diagnostics Packages
@@ -70,31 +70,28 @@ There are five main diagnostics packages:
 
 We will setup everything necessary for you to be able to run the postprocessing and diagnostics packages on the NCAR computers.
 
-#### Setup your `.profile` or `.tcshrc`
-
-If you have never setup a `.profile` or `.tcshrc` on derecho:
+#### Load the  postprocessing and diagnostics packages:
 
 ~~~
-cp /glade/u/home/cstan/.profile ~/.profile
-~~~
-{: .language-bash}
-
-If you already have a `.profile` (bash users) or a `.tcshrc` (tcsh users), look at the corresponding file and add the necessary items from the .profile file to your file.  The .prfile file is located in: `~cstan/`
-
-#### Copy the post-processing scripts to the correct location:
-
-Go to your home directory:
-
-~~~
-cd
+$ module use /glade/work/bdobbins/Software/Modules
+$ module load cesm_postprocessing_derecho
 ~~~
 {: .language-bash}
 
-Create a scripts directory and go to it:
+#### Set up the working directory to run the package:
+
+Create a directory for the experiment to be postprocessed:
 
 ~~~
-mkdir scripts
-cd scripts
+$ mkdir /glade/derecho/scratch/cstan/cesm-postprocess/run.2
+~~~
+{: .language-bash}
+
+Copy the package code:
+
+~~~
+$ create_postprocess -caseroot=/glade/derecho/scratch/cstan/cesm-postprocess/run.2
+$ cp /glade/u/home/dbailey/timeseries .
 ~~~
 {: .language-bash}
 
