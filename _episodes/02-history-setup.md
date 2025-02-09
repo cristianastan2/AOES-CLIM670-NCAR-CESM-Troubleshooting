@@ -80,22 +80,34 @@ $ module load cesm_postprocessing_derecho
 
 #### Set up the working directory to run the package:
 
-Create a directory for the experiment to be postprocessed:
+Go to the directory of case to be processed:
 
 ~~~
-$ mkdir /glade/derecho/scratch/cstan/cesm-postprocess/run.2
+$ cd /glade/derecho/scratch/cstan/run.2
 ~~~
 {: .language-bash}
 
-Copy the package code:
+Create the case to be postprocessed:
 
 ~~~
-$ create_postprocess -caseroot=/glade/derecho/scratch/cstan/cesm-postprocess/run.2
+$ create_postprocess -caseroot=/glade/derecho/scratch/cstan/run.2/postprocess
+$ cd postprocess/
 $ cp /glade/u/home/dbailey/timeseries .
 ~~~
 {: .language-bash}
 
-Copy all files needed:
+Edit timeseries:
+
+- edit project number
+- edit CASE (=casename)
+- edit CASEROOT (=where the model data sits, but do not include the casename, e.g., /glade/derecho/scratch/cstan)
+
+Edit env_postprocess.xml file:
+
+- set CASEROOT and PP_CASE_PATH to the post-processing directory code location (ex. /glade/derecho/scratc/cstan/run.2/postprocess)
+- check that CASE is set correctly
+- set DOUT_S_ROOT correctly (if you don't recall this, use `xmlquery`  
+- set TIMESERIES_INPUT_DIRECTORY and TIMESERIES_OUTPUT_ROOTDIR to where the output should be written (default is DOUT_S_ROOT/[compname]/proc/tseries)
 
 ~~~
 cp -R /glade/u/home/asphilli/CESM_tutorial/* .
