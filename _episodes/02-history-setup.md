@@ -98,6 +98,7 @@ $ cp /glade/u/home/dbailey/timeseries .
 
 Edit timeseries:
 
+- edit walltime (=30 minutes for a short run) 
 - edit project number
 - edit CASE (=casename)
 - edit CASEROOT (=where the model data sits, but do not include the casename, e.g., /glade/derecho/scratch/cstan)
@@ -109,63 +110,10 @@ Edit env_postprocess.xml file:
 - set DOUT_S_ROOT correctly (if you don't recall this, use `xmlquery`  
 - set TIMESERIES_INPUT_DIRECTORY and TIMESERIES_OUTPUT_ROOTDIR to where the output should be written (default is DOUT_S_ROOT/[compname]/proc/tseries)
 
+Execute the post-processing:
+
 ~~~
-cp -R /glade/u/home/asphilli/CESM_tutorial/* .
+$ qsub timeseries
 ~~~
 {: .language-bash}
 
-You may get an error about being able to copy a particular file. You can ignore the error.
-
-Put the configuration file into the correct location:
-
-~~~
-mv hluresfile ../.hluresfile
-~~~
-{: .language-bash}
-
-#### Setup the python environment for the CESM diagnostics and post-processing scripts
-
-~~~
-cesm_pp_activate 
-~~~
-{: .language-bash}
-
-#### Create a directory for the CESM postprocessing code:
-
-~~~
-mkdir /glade/derecho/scratch/cstan/cesm-postprocess
-~~~
-{: .language-bash}
-
-#### Run the postprocessing using `create_postprocess` and tell it the name of your 4-year case
-
-~~~
-create_postprocess --caseroot /glade/derecho/scratch/cstan/cesm-postprocess/run.2
-~~~
-{: .language-bash}
-
-#### Go to the postprocessing directory:
-
-~~~
-cd /glade/derecho/scratch/cstan/cesm-postprocess/run.2
-~~~
-{: .language-bash}
-
-#### Set the location of the model data:
-
-~~~
-./pp_config --set DOUT_S_ROOT=/glade/derecho/scratch/cstan/archive/run.2
-~~~
-{: .language-bash}
-
-#### Tell the diagnostics what kinds of grids to expect, our version uses:
-
-~~~
-./pp_config --set ATM_GRID=1.9x2.5
-./pp_config --set LND_GRID=1.9x2.5
-./pp_config --set ICE_GRID=gx1v7
-./pp_config --set OCN_GRID=gx1v7
-./pp_config --set ICE_NX=320
-./pp_config --set ICE_NY=384
-~~~
-{: .language-bash}
