@@ -22,35 +22,39 @@ Some other requirements:
 
 ### Run a Diagnostics Package 
 
+~~~
+$ cd /glade/derecho/scratch/$USER/run.2/postprocess
+~~~
+{: .language-bash}
+
 Select and run a diagnostics package of interest to you:
 
 
 > ## Atmosphere Diagnostics Package
-> 
+>
 > Edit the settings for the `env_diags_atm.xml` file using `pp_config`
-> 
+>
 > ~~~
-> ./pp_config --set ATMDIAG_OUTPUT_ROOT_PATH=/glade/scratch/cstan/diagnostics-output/atm
-> ./pp_config --set ATMDIAG_test_first_yr=1
-> ./pp_config --set ATMDIAG_test_nyrs=3
+> pp_config --set ATMDIAG_OUTPUT_ROOT_PATH=/glade/scratch/cstan/diagnostics-output/atm
+> pp_config --set ATMDIAG_test_first_yr=1
+> pp_config --set ATMDIAG_test_nyrs=3
 > ~~~
 > {: .language-bash}
->
 > 
 > Run the monthly climatologies
 > ~~~
-> qsub -A UGMU0041 atm_averages
+> qsub -A UGMU0049 -q main atm_averages
 > ~~~
 > {: .language-bash}
 >
-> You can monitor your job status using `qstat -u`
+> You can monitor your job status using `qstat -u $USER`
 > Check the log file in logs to make sure everything ran ok. 
 > This should run relatively quickly (only a few minutes)
 >
 > Once the averages are done, you can submit the diagnostics script:
 >
 > ~~~
-> qsub -A UGMU0041 atm_diagnostics
+> qsub -A UGMU0049 -q main atm_diagnostics
 > ~~~
 > {: .language-bash}
 >
@@ -76,18 +80,18 @@ Select and run a diagnostics package of interest to you:
 > Edit the settings for the `env_diags_land.xml` file using `pp_config`
 >
 > ~~~
-> ./pp_config --set LNDDIAG_OUTPUT_ROOT_PATH=/glade/scratch/cstan/diagnostics-output/lnd
-> ./pp_config --set LNDDIAG_clim_first_yr_1=1
-> ./pp_config --set LNDDIAG_clim_num_yrs_1=3
-> ./pp_config --set LNDDIAG_trends_first_yr_1=1
-> ./pp_config --set LNDDIAG_trends_num_yrs_1=3
+> pp_config --set LNDDIAG_OUTPUT_ROOT_PATH=/glade/scratch/cstan/diagnostics-output/lnd
+> pp_config --set LNDDIAG_clim_first_yr_1=1
+> pp_config --set LNDDIAG_clim_num_yrs_1=3
+> pp_config --set LNDDIAG_trends_first_yr_1=1
+> pp_config --set LNDDIAG_trends_num_yrs_1=3
 > ~~~
 > {: .language-bash}
 >
 >
 > Run the monthly climatologies
 > ~~~
-> qsub -A UGMU0041 lnd_averages
+> qsub -A UGMU0049 -q main lnd_averages
 > ~~~
 > {: .language-bash}
 >
@@ -98,7 +102,7 @@ Select and run a diagnostics package of interest to you:
 > Once the averages are done, you can submit the diagnostics script:
 >
 > ~~~
-> qsub -A UGMU0041 lnd_diagnostics
+> qsub -A UGMU0049 -q main lnd_diagnostics
 > ~~~
 > {: .language-bash}
 >
@@ -123,19 +127,19 @@ Select and run a diagnostics package of interest to you:
 > Edit the settings for the `env_diags_ocn.xml` file using `pp_config`
 >
 > ~~~
-> ./pp_config --set OCNDIAG_YEAR0=1
-> ./pp_config --set OCNDIAG_YEAR1=3
-> ./pp_config --set OCNDIAG_TSERIES_YEAR0=1
-> ./pp_config --set OCNDIAG_TSERIES_YEAR1=3
-> ./pp_config --set OCNDIAG_TAVGDIR=/glade/scratch/cstan/diagnostics-output/ocn/climo/tavg.\$OCNDIAG_YEAR0.\$OCNDIAG_YEAR1
-> ./pp_config --set OCNDIAG_WORKDIR=/glade/scratch/cstan/diagnostics-output/ocn/diag/run.2.\$OCNDIAG_YEAR0.\$OCNDIAG_YEAR1
+> pp_config --set OCNDIAG_YEAR0=1
+> pp_config --set OCNDIAG_YEAR1=3
+> pp_config --set OCNDIAG_TSERIES_YEAR0=1
+> pp_config --set OCNDIAG_TSERIES_YEAR1=3
+> pp_config --set OCNDIAG_TAVGDIR=/glade/scratch/cstan/diagnostics-output/ocn/climo/tavg.\$OCNDIAG_YEAR0.\$OCNDIAG_YEAR1
+> pp_config --set OCNDIAG_WORKDIR=/glade/scratch/cstan/diagnostics-output/ocn/diag/run.2.\$OCNDIAG_YEAR0.\$OCNDIAG_YEAR1
 > ~~~
 > {: .language-bash}
 >
 >
 > Run the monthly climatologies
 > ~~~
-> qsub -A UGMU0041 ocn_averages
+> qsub -A UGMU0049 -q main ocn_averages
 > ~~~
 > {: .language-bash}
 >
@@ -146,7 +150,7 @@ Select and run a diagnostics package of interest to you:
 > Once the averages are done, you can submit the diagnostics script:
 >
 > ~~~
-> qsub -A UGMU0041 ocn_diagnostics
+> qsub -A UGMU0049 -q main ocn_diagnostics
 > ~~~
 > {: .language-bash}
 >
@@ -169,18 +173,18 @@ Select and run a diagnostics package of interest to you:
 > Edit the settings for the `env_diags_ic.xml` file using `pp_config`
 >
 > ~~~
-> ./pp_config --set ICEDIAG_BEGYR_CONT=1
-> ./pp_config --set ICEDIAG_ENDYR_CONT=3
-> ./pp_config --set ICEDIAG_YRS_TO_AVG=3
-> ./pp_config --set ICEDIAG_PATH_CLIMO_CONT=/glade/scratch/cstan/diagnostics-output/ice/climo/\$ICEDIAG_CASE_TO_CONT/
-> ./pp_config --set ICEDIAG_DIAG_ROOT=/glade/scratch/cstan/diagnostics-output/ice/diag/\$ICEDIAG_CASE_TO_CONT/
+> pp_config --set ICEDIAG_BEGYR_CONT=1
+> pp_config --set ICEDIAG_ENDYR_CONT=3
+> pp_config --set ICEDIAG_YRS_TO_AVG=3
+> pp_config --set ICEDIAG_PATH_CLIMO_CONT=/glade/scratch/cstan/diagnostics-output/ice/climo/\$ICEDIAG_CASE_TO_CONT/
+> pp_config --set ICEDIAG_DIAG_ROOT=/glade/scratch/cstan/diagnostics-output/ice/diag/\$ICEDIAG_CASE_TO_CONT/
 > ~~~
 > {: .language-bash}
 >
 >
 > Run the monthly climatologies
 > ~~~
-> qsub -A UGMU0041 ice_averages
+> qsub -A UGMU0049 -q main ice_averages
 > ~~~
 > {: .language-bash}
 >
@@ -191,7 +195,7 @@ Select and run a diagnostics package of interest to you:
 > Once the averages are done, you can submit the diagnostics script:
 >
 > ~~~
-> qsub -A UGMU0041 ice_diagnostics
+> qsub -A UGMU0049 -q main ice_diagnostics
 > ~~~
 > {: .language-bash}
 >
@@ -217,7 +221,7 @@ Our runs are not long enough to run the CVDP, but you can test it on an existing
 #### On Cheyenne, we need to get an analysis node to Casper
 
 ~~~
-execdav --account=UGMU0041
+execdav --account=UGMU0049
 cd ~/scripts/CVDP
 ~~~
 {: .language-bash}
