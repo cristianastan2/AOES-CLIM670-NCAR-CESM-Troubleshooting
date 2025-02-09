@@ -78,7 +78,7 @@ $ module load cesm_postprocessing_derecho
 ~~~
 {: .language-bash}
 
-#### Set up the working directory to run the package:
+#### Set up the working directory to run the packages:
 
 Go to the directory of case to be processed:
 
