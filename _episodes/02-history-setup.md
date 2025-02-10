@@ -91,7 +91,6 @@ Create the case to be postprocessed:
 
 ~~~
 $ create_postprocess -caseroot=/glade/derecho/scratch/cstan/run.2/postprocess
-$ cd postprocess/
 ~~~
 {: .language-bash}
 
