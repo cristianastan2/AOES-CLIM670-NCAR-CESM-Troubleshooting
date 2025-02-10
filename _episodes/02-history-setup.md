@@ -101,7 +101,13 @@ $ cd postprocess/
 ~~~
 {: .language-bash}
 
-Set the location of the model data using `pp_config`
+Set the case name using `pp_config`:
+~~~
+$ pp_config --set CASE=run.2
+~~~
+{: .language-bash}
+
+Set the location of the model data using `pp_config`:
 
 ~~~
 $ pp_config --set DOUT_S_ROOT=/glade/derecho/scratch/$USER/archive/run.2
