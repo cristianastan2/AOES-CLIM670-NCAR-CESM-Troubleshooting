@@ -92,28 +92,32 @@ Create the case to be postprocessed:
 ~~~
 $ create_postprocess -caseroot=/glade/derecho/scratch/cstan/run.2/postprocess
 $ cd postprocess/
-$ cp /glade/u/home/dbailey/timeseries .
 ~~~
 {: .language-bash}
 
-Edit timeseries:
-
-- edit walltime (=30 minutes for a short run) 
-- edit project number
-- edit CASE (=casename)
-- edit CASEROOT (=where the model data sits, but do not include the casename, e.g., /glade/derecho/scratch/cstan)
-
-Edit env_postprocess.xml file:
-
-- set CASEROOT and PP_CASE_PATH to the post-processing directory code location (ex. /glade/derecho/scratc/cstan/run.2/postprocess)
-- check that CASE is set correctly
-- set DOUT_S_ROOT correctly (if you don't recall this, use `xmlquery`  
-- set TIMESERIES_INPUT_DIRECTORY and TIMESERIES_OUTPUT_ROOTDIR to where the output should be written (default is DOUT_S_ROOT/[compname]/proc/tseries)
-
-Execute the post-processing:
+### Configure the package:
 
 ~~~
-$ qsub timeseries
+$ cd postprocess/
+~~~
+{: .language-bash}
+
+Set the location of the model data using `pp_config`
+
+~~~
+$ pp_config --set DOUT_S_ROOT=/glade/derecho/scratch/$USER/archive/run.2
+~~~
+{: .language-bash}
+
+Tell the diagnostics what kinds of grids to expect, our version uses:
+
+~~~
+$ pp_config --set ATM_GRID=1.9x2.5
+$ pp_config --set LND_GRID=1.9x2.5
+$ pp_config --set ICE_GRID=gx1v7
+$ pp_config --set OCN_GRID=gx1v7
+$ pp_config --set ICE_NX=320
+$ pp_config --set ICE_NY=384
 ~~~
 {: .language-bash}
 
