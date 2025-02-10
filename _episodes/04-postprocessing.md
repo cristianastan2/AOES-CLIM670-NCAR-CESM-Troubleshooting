@@ -11,7 +11,7 @@ keypoints:
 
 The process of going from `history` files to `timeseries` files and to convert 3D atmospheric data from the model coordinate system to selected pressure levels. We will learn how to use the CESM Postprocessing Tools
 
-
+<!---
 The post processing scripts are located in your ~/scripts/ directory.
 You can find them using `ls *create*`.
 
@@ -39,4 +39,35 @@ You can take a quick look at them in `ncview`.
 To do Assignment #3, you can read them in using `xarray` 
 
 Run the post-processing for whichever component is of interest to you.
+
+--->
+
+~~~
+$ cd postprocess/
+$ cp /glade/u/home/dbailey/timeseries .
+~~~
+{: .language-bash}
+
+Edit timeseries:
+
+- edit walltime (=30 minutes for a short run) 
+- edit project number
+- edit CASE (=casename)
+- edit CASEROOT (=where the model data sits, but do not include the casename, e.g., /glade/derecho/scratch/cstan)
+
+Edit env_postprocess.xml file:
+
+- set CASEROOT and PP_CASE_PATH to the post-processing directory code location (ex. /glade/derecho/scratc/cstan/run.2/postprocess)
+- check that CASE is set correctly
+- set DOUT_S_ROOT correctly (if you don't recall this, use `xmlquery`)
+- set TIMESERIES_INPUT_DIRECTORY and TIMESERIES_OUTPUT_ROOTDIR to where the output should be written (default is DOUT_S_ROOT/[compname]/proc/tseries)
+
+Execute the post-processing:
+
+~~~
+$ qsub timeseries
+~~~
+{: .language-bash}
+
+
 
