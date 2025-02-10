@@ -55,7 +55,7 @@ Edit timeseries:
 - edit CASE (=casename)
 - edit CASEROOT (=where the model data sits, but do not include the casename, e.g., /glade/derecho/scratch/cstan)
 
-Edit the setting sof `env_postprocess.xml` file using `pp_config`:
+Edit the settings of `env_postprocess.xml` file using `pp_config`:
 
 ~~~
 pp_config --set TIMESERIES_OUTPUT_ROOTDIR=/glade/derecho/scratch/$USER/diagnostics-output/tseries
