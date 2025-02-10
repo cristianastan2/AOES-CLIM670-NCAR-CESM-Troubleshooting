@@ -35,7 +35,7 @@ Select and run a diagnostics package of interest to you:
 > Edit the settings for the `env_diags_atm.xml` file using `pp_config`
 >
 > ~~~
-> pp_config --set ATMDIAG_OUTPUT_ROOT_PATH=/glade/scratch/cstan/diagnostics-output/atm
+> pp_config --set ATMDIAG_OUTPUT_ROOT_PATH=/glade/derecho/scratch/$USER/diagnostics-output/atm
 > pp_config --set ATMDIAG_test_first_yr=1
 > pp_config --set ATMDIAG_test_nyrs=3
 > ~~~
@@ -62,7 +62,7 @@ Select and run a diagnostics package of interest to you:
 > Once it is done, you can go to the location of the diagnostics and look at the output via a webpage:
 >
 > ~~~
-> cd glade/scratch/cstan/diagnostics-output/atm/diag/run.2-obs.1_3
+> cd /glade/derecho/scratcg/$USER/diagnostics-output/atm/diag/run.2-obs.1_3
 > firefox index.html &
 > ~~~
 > {: .language-bash}
@@ -80,7 +80,7 @@ Select and run a diagnostics package of interest to you:
 > Edit the settings for the `env_diags_land.xml` file using `pp_config`
 >
 > ~~~
-> pp_config --set LNDDIAG_OUTPUT_ROOT_PATH=/glade/scratch/cstan/diagnostics-output/lnd
+> pp_config --set LNDDIAG_OUTPUT_ROOT_PATH=/glade/derecho/scratch/$USER/diagnostics-output/lnd
 > pp_config --set LNDDIAG_clim_first_yr_1=1
 > pp_config --set LNDDIAG_clim_num_yrs_1=3
 > pp_config --set LNDDIAG_trends_first_yr_1=1
@@ -110,7 +110,7 @@ Select and run a diagnostics package of interest to you:
 > Once it is done, you can go to the location of the diagnostics and look at the output via a webpage:
 >
 > ~~~
-> cd /glade/scratch/cstan/diagnostics-output/lnd/diag/run.2-obs.1_3
+> cd /glade/derecho/scratch/$USER/diagnostics-output/lnd/diag/run.2-obs.1_3
 > firefox setsIndex.html &
 > ~~~
 > {: .language-bash}
@@ -131,8 +131,8 @@ Select and run a diagnostics package of interest to you:
 > pp_config --set OCNDIAG_YEAR1=3
 > pp_config --set OCNDIAG_TSERIES_YEAR0=1
 > pp_config --set OCNDIAG_TSERIES_YEAR1=3
-> pp_config --set OCNDIAG_TAVGDIR=/glade/scratch/cstan/diagnostics-output/ocn/climo/tavg.\$OCNDIAG_YEAR0.\$OCNDIAG_YEAR1
-> pp_config --set OCNDIAG_WORKDIR=/glade/scratch/cstan/diagnostics-output/ocn/diag/run.2.\$OCNDIAG_YEAR0.\$OCNDIAG_YEAR1
+> pp_config --set OCNDIAG_TAVGDIR=/glade/derecho/scratch/$USER/diagnostics-output/ocn/climo/tavg.\$OCNDIAG_YEAR0.\$OCNDIAG_YEAR1
+> pp_config --set OCNDIAG_WORKDIR=/glade/derecho/scratch/$USER/diagnostics-output/ocn/diag/run.2.\$OCNDIAG_YEAR0.\$OCNDIAG_YEAR1
 > ~~~
 > {: .language-bash}
 >
@@ -158,7 +158,7 @@ Select and run a diagnostics package of interest to you:
 > Once it is done, you can go to the location of the diagnostics and look at the output via a webpage:
 >
 > ~~~
-> cd /glade/scratch/cstan/diagnostics-output/ocn/diag/run.2.1_3
+> cd /glade/derecho/scratch/$USER/diagnostics-output/ocn/diag/run.2.1_3
 > firefox index.html &
 > ~~~
 > {: .language-bash}
@@ -203,7 +203,7 @@ Select and run a diagnostics package of interest to you:
 > Once it is done, you can go to the location of the diagnostics and look at the output via a webpage:
 >
 > ~~~
-> cd /glade/scratch/cstan/diagnostics-output/ice/diag/run.2.1_3
+> cd /glade/derecho/scratch/$USER/diagnostics-output/ice/diag/run.2.1_3
 > firefox index.html &
 > ~~~
 > {: .language-bash}
