@@ -35,6 +35,7 @@ Select and run a diagnostics package of interest to you:
 > Edit the settings for the `env_diags_atm.xml` file using `pp_config`
 >
 > ~~~
+> pp_config --set ATMDIAG_test_casename=run.2
 > pp_config --set ATMDIAG_OUTPUT_ROOT_PATH=/glade/derecho/scratch/$USER/diagnostics-output/atm
 > pp_config --set ATMDIAG_test_first_yr=1
 > pp_config --set ATMDIAG_test_nyrs=3
