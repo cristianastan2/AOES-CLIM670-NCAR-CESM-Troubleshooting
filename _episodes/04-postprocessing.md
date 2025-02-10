@@ -59,8 +59,10 @@ Edit the setting sof `env_postprocess.xml` file using `pp_config`:
 
 ~~~
 pp_config --set TIMESERIES_OUTPUT_ROOTDIR=/glade/derecho/scratch/$USER/diagnostics-output/tseries
+~~~
+{: .language-bash}
 
-Execute the post-processing:
+Run the postprocessing:
 
 ~~~
 $ qsub timeseries
