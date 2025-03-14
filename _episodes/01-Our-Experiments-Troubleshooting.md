@@ -124,32 +124,30 @@ cases/branchwrong> more CaseStatus
 {: .language-bash}
 
 ~~~
-2023-03-05 18:01:16: xmlchange success <command> ./xmlchange RUN_TYPE=branch,RUN_REFCASE=b.day1.0,RUN_REFDATE=0001-01-05,CLM_NAMELIST_OPTS=,GET_REFCASE=FALSE,STOP_OPTION=nmonths,STOP_N=1,RESUBMIT=1,CCSM_CO2_PPMV=569.4  </command>
+2025-03-14 09:15:36: xmlchange success <command> ./xmlchange RUN_TYPE=branch,RUN_REFCASE=b.day1.0,RUN_REFDATE=0001-01-05,CLM_NAMELIST_OPTS=,GET_REFCASE=FALSE,STOP_OPTION=nmonths,STOP_N=1,RESUBMIT=1,CCSM_CO2_PPMV=569.4  </command>
  ---------------------------------------------------
-2023-03-05 18:01:46: xmlchange success <command> ./xmlchange JOB_WALLCLOCK_TIME=2:00:00  </command>
+2025-03-14 09:16:01: case.setup starting
  ---------------------------------------------------
-2023-03-05 18:02:13: case.setup starting
+2025-03-14 09:16:04: case.setup success
  ---------------------------------------------------
-2023-03-05 18:02:16: case.setup success
+2025-03-14 09:16:30: case.build starting
  ---------------------------------------------------
-2023-03-05 18:03:08: case.build starting
- ---------------------------------------------------
-2023-03-05 18:03:10: case.build error
+2025-03-14 09:16:35: case.build error
 ERROR: Missing required pointer_file /glade/derecho/scratch/cstan/branchwrong/run/rpointer.ocn.restart ---has pop initial data been prestaged to /glade/derecho/scratch/cstan/branchwrong/run?
  ---------------------------------------------------
-2023-03-05 18:08:31: case.build starting
+2025-03-14 09:24:24: case.build starting
  ---------------------------------------------------
-CESM version is cesm2.1.3-rc.01
-Processing externals description file : Externals.cfg
-Processing externals description file : Externals_CLM.cfg
-Processing externals description file : Externals_POP.cfg
-Processing externals description file : Externals_CISM.cfg
-Processing externals description file : Externals_CAM.cfg
-Checking status of externals: clm, fates, ptclm, mosart, ww3, cime, cice, pop, cvmix, marbl, cism, source_cism, rtm, cam, clubb, carma, cosp2, chem_proc,
+CESM version is release-cesm2.1.5
+Processing externals description file : Externals.cfg (/glade/work/cstan/cesm2.1.5)
+Processing externals description file : Externals_CAM.cfg (/glade/work/cstan/cesm2.1.5/components/cam)
+Processing externals description file : Externals_CISM.cfg (/glade/work/cstan/cesm2.1.5/components/cism)
+Processing externals description file : Externals_CLM.cfg (/glade/work/cstan/cesm2.1.5/components/clm)
+Processing externals description file : Externals_POP.cfg (/glade/work/cstan/cesm2.1.5/components/pop)
+Checking local status of required & optional components: cam, chem_proc, carma, clubb, cosp2, cice, cime, cism, source_cism, clm, fates, mosart, pop, cvmix, marbl, rtm, ww3,
     ./cime
-        clean sandbox, on cime5.6.32
+        clean sandbox, on cime5.6.49
     ./components/cam
-        clean sandbox, on cam_cesm2_1_rel_41
+        clean sandbox, on cam_cesm2_1_rel_60
     ./components/cam/chem_proc
         clean sandbox, on tools/proc_atm/chem_proc/release_tags/chem_proc5_0_03_rel
     ./components/cam/src/physics/carma/base
@@ -157,23 +155,21 @@ Checking status of externals: clm, fates, ptclm, mosart, ww3, cime, cice, pop, c
     ./components/cam/src/physics/clubb
         clean sandbox, on vendor_clubb_r8099_n03
     ./components/cam/src/physics/cosp2/src
-        clean sandbox, on CFMIP/COSPv2.0/tags/v2.1.4cesm/src
+        clean sandbox, on v2.1.4cesm
     ./components/cice
-        clean sandbox, on cice5_cesm2_1_1_20190321
+        clean sandbox, on cice5_cesm2_1_1_20231220
     ./components/cism
-        clean sandbox, on cism-release-cesm2.1.2_02
+        clean sandbox, on cism-release-cesm2.1.2_04
     ./components/cism/source_cism
-        clean sandbox, on release-cism2.1.03
+        clean sandbox, on release-cism2.1.04
     ./components/clm
-        clean sandbox, on release-clm5.0.30
+        clean sandbox, on release-clm5.0.37
     ./components/clm/src/fates
         clean sandbox, on sci.1.30.0_api.8.0.0
-    ./components/clm/tools/PTCLM
-        clean sandbox, on PTCLM2_20200121
     ./components/mosart
         clean sandbox, on release-cesm2.0.04
     ./components/pop
-        clean sandbox, on pop2_cesm2_1_rel_n09
+        clean sandbox, on pop2_cesm2_1_rel_n15
     ./components/pop/externals/CVMix
         clean sandbox, on v0.93-beta
     ./components/pop/externals/MARBL
@@ -182,39 +178,36 @@ Checking status of externals: clm, fates, ptclm, mosart, ww3, cime, cice, pop, c
         clean sandbox, on release-cesm2.0.04
     ./components/ww3
         clean sandbox, on ww3_181001
-2023-03-05 18:19:23: case.build success
+2025-03-14 09:32:46: case.build success
  ---------------------------------------------------
-2023-03-05 18:20:23: case.submit starting
+2025-03-14 09:35:32: case.submit starting
  ---------------------------------------------------
-2023-03-05 18:20:29: case.submit error
-ERROR: Command: 'qsub -q regular -l walltime=2:00:00 -A UGMU0035 -v ARGS_FOR_SCRIPT='--resubmit' .case.run' failed with error 'qsub: Invalid account, available accounts:
-Project, Status, Active
-UGMU0041, Normal, True' from dir '/glade/u/home/cstan/cases/branchwrong'
+2025-03-14 09:35:48: case.submit error
+ERROR: Command: 'qsub -q main -l walltime=12:00:00 -A UGMU0035 -l job_priority=regular -v ARGS_FOR_SCRIPT='--resubmit' .case.run' failed with error 'b'qsub: Invalid account for CPU usage, available accounts:\nProject, Status, Active\nP06010014, Normal, True\nUGMU0049, Normal, True'' from dir '/glade/u/home/cstan/cases/branchwrong'
  ---------------------------------------------------
-2023-03-05 18:25:52: xmlchange success <command> ./xmlchange PROJECT=UGMU0041  </command>
+2025-03-14 09:38:07: xmlchange success <command> ./xmlchange PROJECT=UGMU0049  </command>
  ---------------------------------------------------
-2023-03-05 18:26:38: case.submit starting
+2025-03-14 09:45:56: case.submit starting
  ---------------------------------------------------
-2023-03-05 18:26:45: case.submit success case.run:8818830.chadmin1.ib0.cheyenne.ucar.edu, case.st_archive:8818831.chadmin1.ib0.cheyenne.ucar.edu
+2025-03-14 09:46:11: case.submit success case.run:8798603.desched1, case.st_archive:8798604.desched1
  ---------------------------------------------------
-2023-03-05 18:26:50: case.run starting
+2025-03-14 10:28:11: case.run starting
  ---------------------------------------------------
-2023-03-05 18:26:57: model execution starting
+2025-03-14 10:28:21: model execution starting
  ---------------------------------------------------
-2023-03-05 18:27:00: model execution success
+2025-03-14 10:28:29: model execution success
  ---------------------------------------------------
-2023-03-05 18:27:00: case.run error
-ERROR: RUN FAIL: Command 'mpiexec_mpt -p "%g:"  -np 576  omplace -tm open64  /glade/derecho/scratch/cstan/branchwrong/bld/cesm.exe  >> cesm.log.$LID 2>&1 ' failed
-See log file for details: /glade/derecho/scratch/cstan/branchwrong/run/cesm.log.8818830.chadmin1.ib0.cheyenne.ucar.edu.230305-182650
+2025-03-14 10:28:29: case.run error
+ERROR: RUN FAIL: Command 'mpiexec  --label  --line-buffer  -n 768 /glade/derecho/scratch/cstan/branchwrong/bld/cesm.exe  >> cesm.log.$LID 2>&1 ' failed
+See log file for details: /glade/derecho/scratch/cstan/branchwrong/run/cesm.log.8800215.desched1.250314-112041
  ---------------------------------------------------
 ~~~
 {: .output}
 
-
 Another thing we did that is not documented automatically is to copy the restart files from our `b.day1.0` case to our new run directory. This was so the model has a set of restart files to start the run from.
 
 ~~~
-cp /glade/derecho/scratch/cstan/archive/b.day1.0/rest/0001-01-06-00000/* /glade/scratch/cstan/branchwrong/run/ 
+cp /glade/derecho/scratch/cstan/archive/b.day1.0/rest/0001-01-16-00000/* /glade/scratch/cstan/branchwrong/run/ 
 ~~~
 {: .language-bash}
 
@@ -223,10 +216,9 @@ cp /glade/derecho/scratch/cstan/archive/b.day1.0/rest/0001-01-06-00000/* /glade/
 Look at your log file and use `grep -i` to find errors.
 
 ~~~
-cases/branchwrong> grep -i error /glade/derecho/scratch/cstan/branchwrong/run/cesm.log.8818830.chadmin1.ib0.cheyenne.ucar.edu.230305-182650
+cases/branchwrong> grep -i error /glade/derecho/scratch/cstan/branchwrong/run/cesm.log.8800215.desched1.250314-112041
 ~~~
 {: .language-bash}
-
 ~~~
 16: ERROR: GETFIL: FAILED to get b.day1.0.cam.r.0001-01-05-00000.nc
 4: ERROR: GETFIL: FAILED to get b.day1.0.cam.r.0001-01-05-00000.nc
@@ -299,8 +291,8 @@ more quickly if we tell it we need less time.
 > > ## Solution
 > >
 > > ~~~
-> > RUN_REFDATE=0001-01-06
-> > ./xmlchange RUN_REFDATE='0001-01-06'
+> > RUN_REFDATE=0001-01-16
+> > ./xmlchange RUN_REFDATE='0001-01-16'
 > > ~~~
 > > {: .language-bash}
 > >
