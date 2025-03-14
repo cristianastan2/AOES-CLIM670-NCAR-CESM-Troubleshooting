@@ -63,9 +63,9 @@ ls
 ~~~
 {: .language-bash}
 
-The `test1.cam.h0.*.nc` files contain monthly averaged data.
+The `run2.cam.h0.*.nc` files contain monthly averaged data.
 
-The `test1.cam.h1.*.nc` contain daily averaged data.
+The `run2.cam.h1.*.nc` contain daily averaged data.
 
 > ## What is in these files?
 >
