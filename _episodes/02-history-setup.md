@@ -66,36 +66,46 @@ There are five main diagnostics packages:
 
 ### Postprocessing and Diagnostics Packages Setup
 
-We will setup everything necessary for you to be able to run the postprocessing and diagnostics packages on the NCAR computers.
+We will setup everything necessary for you to be able to run the postprocessing and diagnostics packages on the NCAR computers. We will work on Casper, the system system of specialized data analysis and visualization resources; large-memory, multi-GPU nodes; and high-throughput computing nodes.
 
-#### Load the  postprocessing and diagnostics packages:
-
-~~~
-$ module use /glade/work/bdobbins/Software/Modules
-$ module load cesm_postprocessing_derecho
-~~~
-{: .language-bash}
-
-#### Set up the working directory to run the packages:
-
-Go to the directory of case to be processed:
+#### Login to Casper:
 
 ~~~
-$ cd /glade/derecho/scratch/cstan/run.2
+$ aah -XY username@casper.hpc.ucar.edu
 ~~~
 {: .language-bash}
 
-Create the case to be postprocessed:
+After running the `ssh` command, you will be asked to finish loggin in. 
+Casper has full access to glade/
 
+#### Checkout ADF and activate the conda environment:
 ~~~
-$ create_postprocess -caseroot=/glade/derecho/scratch/cstan/run.2/postprocess
+$ git clone --recursive https://github.com/NCAR/ADF.git
+$ module load conda
+$ conda activate npl-2024a
 ~~~
 {: .language-bash}
 
-### Configure the package:
+Also, along with these python requirements, the ncrcat NetCDF Operator (NCO) is also needed. This can be loaded by simply running:
+~~~
+$ module load nco
+$ module load ncl
+~~~
+{: .language-bash}
+
+### Configuration files:
+The ADF requires 2 different yaml configuration files:
+
+`config_amwg_default_plots.yaml` and `adf_variable_defaults.yaml`
+
+> ## Do not modify either of these files!
+> 
+> It is recommended to make a copy of each file, make modifications in those copies, and then run them with the ADF.
+>
+{: .callout}
 
 ~~~
-$ cd postprocess/
+$ cd ADF
 ~~~
 {: .language-bash}
 
