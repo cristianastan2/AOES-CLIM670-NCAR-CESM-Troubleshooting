@@ -109,28 +109,16 @@ $ cd ADF
 ~~~
 {: .language-bash}
 
-Set the case name using `pp_config`:
-~~~
-$ pp_config --set CASE=run.2
-~~~
-{: .language-bash}
+## Run-time yaml
 
-Set the location of the model data using `pp_config`:
+`config_amwg_default_plots.yaml`
 
-~~~
-$ pp_config --set DOUT_S_ROOT=/glade/derecho/scratch/$USER/archive/run.2
-~~~
-{: .language-bash}
+This is the most important file for the ADF, it stores all the necessary information that the ADF needs to run including all the relevant information about the case and baseline/observation/cmip runs.
 
-Tell the diagnostics what kinds of grids to expect, our version uses:
+Make a copy of tis file that you will edit
 
 ~~~
-$ pp_config --set ATM_GRID=1.9x2.5
-$ pp_config --set LND_GRID=1.9x2.5
-$ pp_config --set ICE_GRID=gx1v7
-$ pp_config --set OCN_GRID=gx1v7
-$ pp_config --set ICE_NX=320
-$ pp_config --set ICE_NY=384
+$ cp config_amwg_default_plots.yaml config_amwg_myCopy_plots.yaml
 ~~~
 {: .language-bash}
 
