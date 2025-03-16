@@ -58,7 +58,7 @@ The process of going from `history` files to `timeseries` files and to convert 3
 
 There is a large suite of postprocessing and diagnostic packages developed by NCAR using Python scripts that automatically generate a variety of different kinds of plots from model output files and used to evaluate a simulation. They all compute a series of pre-defined metrics and display the plots via a website. These packages are under development. 
 
-There are five main diagnostics packages:
+There are two main diagnostics packages:
 1. [The Atmosphere Model Working Group (AMWG) Diagnostics Framework (ADF)](https://ncar.github.io/CESM-Tutorial/notebooks/diagnostics/additional/adf.html)
    * Climate Variability and Diagnostics Package (CVDP) 
 3. [CESM Unified Postprocessing and Diagnostics (CUPiD)](https://www.cesm.ucar.edu/sites/default/files/2024-03/2024-cesm-sewg-tkingmlevypptx.pdf)
