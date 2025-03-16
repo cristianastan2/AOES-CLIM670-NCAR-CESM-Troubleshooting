@@ -7,6 +7,18 @@ questions:
 objectives:
 keypoints:
 ---
+
+ADF can also be used to run the AMWG diagnostics package and the CVDP package. AMWG is desigend to compare CAM or CAM-like simulations against other CAM simulations, observations, reanalysis or model comparison sets. 
+
+In the ADF/ directory, create a copy of the config_cam_baseline_example.yaml:
+
+~~~
+$ cp config_cam_baseline_example.yaml config_cam_myCopy_example.yaml
+~~~
+{: .language-bash}
+
+
+
 <!-- 
 ### Some requirements for the diagnostics packages
 
