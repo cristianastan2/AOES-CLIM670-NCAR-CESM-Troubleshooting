@@ -8,14 +8,12 @@ objectives:
 keypoints:
 ---
 
-ADF can also be used to run the AMWG diagnostics package and the CVDP package. AMWG is desigend to compare CAM or CAM-like simulations against other CAM simulations, observations, reanalysis or model comparison sets. 
+ADF can also be used to run the AMWG diagnostics package and the CVDP package. AMWG is desigend to compare CAM or CAM-like simulations against other CAM simulations, observations, reanalysis or model comparison sets. THis can be run in Jupyter Notebook:
 
-In the ADF/ directory, create a copy of the config_cam_baseline_example.yaml:
+Start NCAR [JupyterHub](https://jupyterhub.hpc.ucar.edu/stable/hub/home) and open a Jupyter Notebook with Kernel NPL2024a
 
-~~~
-$ cp config_cam_baseline_example.yaml config_cam_myCopy_example.yaml
-~~~
-{: .language-bash}
+Change to the ADF directory and make a copy of the `config_cam_baseline_example.yaml` file. Open that copied file and make the following changes:
+
 
 
 
