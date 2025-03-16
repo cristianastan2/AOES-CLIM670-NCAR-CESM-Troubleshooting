@@ -122,3 +122,19 @@ $ cp config_amwg_default_plots.yaml config_amwg_myCopy_plots.yaml
 ~~~
 {: .language-bash}
 
+Open that copied file and the main sections you will want to change are:
+
+user - use your NCAR ursename
+
+compare_obs - set true if you want to compare your run with observations or false if you want to compare two runs
+
+hist_str - [cam.h0, cam.h1]
+
+cam_case_name - the name of the case run (no path included)
+
+cam_hist_loc - where the h# history files live (example for my run.2 case: /glade/derecho/scratch/cstan/archive/${diag_cam_climo.cam_case_name}/atm/hist)
+
+start/end_years - climo years desired 
+
+
+
