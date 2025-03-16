@@ -8,6 +8,7 @@ objectives:
 keypoints:
 ---
 
+<--- 
 ### Some requirements for the diagnostics packages
 
 Each component diagnostics package has minimum requirements for how much data must be available to run them:
@@ -247,6 +248,8 @@ ncl driver.ncl
 {: .language-bash}
 
 It will take ~20 minutes.  Once it is complete, go to the output directory and open a firefox window
+
+--->
 
 ~~~
 cd /glade/scatch/cstan/CVDP
