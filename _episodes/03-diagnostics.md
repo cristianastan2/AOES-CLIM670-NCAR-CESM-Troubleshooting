@@ -28,7 +28,7 @@ Change to the ADF directory and make a copy of the `config_cam_baseline_example.
 
 Save the yaml file and open the `jupyter_sample.ipynb` notebook. Modify the line 
 
-config_file=os.path.join(adf_code,"config_cam_baseline_example.yaml")
+`config_file=os.path.join(adf_code,"config_cam_baseline_example.yaml")`
 
 to reflect the name of your yaml file. 
 
