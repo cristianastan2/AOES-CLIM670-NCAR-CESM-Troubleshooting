@@ -7,7 +7,7 @@ questions:
 objectives:
 keypoints:
 ---
-```
+<!-- 
 ### Some requirements for the diagnostics packages
 
 Each component diagnostics package has minimum requirements for how much data must be available to run them:
@@ -256,4 +256,4 @@ firefox index.html&
 ~~~
 {: .language-bash}
 
-```
+-->
