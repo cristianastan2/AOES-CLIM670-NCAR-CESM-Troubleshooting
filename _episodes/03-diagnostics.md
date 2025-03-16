@@ -14,8 +14,23 @@ Start NCAR [JupyterHub](https://jupyterhub.hpc.ucar.edu/stable/hub/home) and ope
 
 Change to the ADF directory and make a copy of the `config_cam_baseline_example.yaml` file. Open that copied file and make the following changes:
 
+**user** - use your NCAR ursename
 
+**compare_obs** - set true if you want to compare your run with observations or false if you want to compare two runs
 
+**hist_str** - [cam.h0, cam.h1]
+
+**cam_case_name** - the name of the case run (no path included)
+
+**cam_hist_loc** - where the h# history files live (example for my run.2 case: /glade/derecho/scratch/cstan/archive/${diag_cam_climo.cam_case_name}/atm/hist)
+
+**start_year, end_year** - climo years desired 
+
+Save the yaml file and open the `jupyter_sample.ipynb` notebook. Modify the line 
+
+config_file=os.path.join(adf_code,"config_cam_baseline_example.yaml")
+
+to reflect the name of your yaml file. 
 
 <!-- 
 ### Some requirements for the diagnostics packages
