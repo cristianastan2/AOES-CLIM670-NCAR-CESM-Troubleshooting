@@ -12,7 +12,6 @@ keypoints:
 
 The process of going from `history` files to `timeseries` files and to convert 3D atmospheric data from the model coordinate system to selected pressure levels. We will learn how to use the CESM Postprocessing Tools
 
-<!---
 The post processing scripts are located in your ~/scripts/ directory.
 You can find them using `ls *create*`.
 
