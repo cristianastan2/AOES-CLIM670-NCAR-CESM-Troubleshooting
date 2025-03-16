@@ -8,6 +8,7 @@ questions:
 objectives:
 keypoints:
 ---
+<!--
 
 The process of going from `history` files to `timeseries` files and to convert 3D atmospheric data from the model coordinate system to selected pressure levels. We will learn how to use the CESM Postprocessing Tools
 
@@ -71,5 +72,6 @@ $ qsub timeseries
 ~~~
 {: .language-bash}
 
+-->
 
 
