@@ -248,8 +248,6 @@ ncl driver.ncl
 
 It will take ~20 minutes.  Once it is complete, go to the output directory and open a firefox window
 
---->
-
 ~~~
 cd /glade/scatch/cstan/CVDP
 firefox index.html&
