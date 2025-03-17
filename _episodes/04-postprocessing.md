@@ -40,8 +40,6 @@ To do Assignment #3, you can read them in using `xarray`
 
 Run the post-processing for whichever component is of interest to you.
 
---->
-
 ~~~
 $ cd postprocess/
 $ cp /glade/u/home/dbailey/timeseries .
